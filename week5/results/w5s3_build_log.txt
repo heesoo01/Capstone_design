@@ -1,0 +1,44 @@
+
+===== BUILD w5_stage3_1_joint =====
+  [OK] 관절 감쇠 = 0.1 N*m/(rad/s)
+  Joint 포트: LConn 2개, RConn 3개 (기대 2, 3)
+  [OK] WorldFrame -> Joint.B
+  [OK] Joint.F -> LinkInertia
+  [OK] World 노드 -> Solver
+  [OK] World 노드 -> Mechanism
+  [OK] Joint.q -> PS2S_q
+  [OK] Joint.w -> PS2S_qd
+  [OK] S2PS_tau -> Joint.t
+[OK] 저장: D:\Capstone_design\week5\scripts\..\models\w5_stage3_1_joint.slx
+
+===== BUILD w5_stage3_1_joint_gearcheck =====
+  [OK] WorldFrame -> Joint.B
+  [OK] Joint.F -> LinkInertia
+  [OK] World -> Solver
+  [OK] World -> Mechanism
+  [OK] Joint.w -> PS2S_qd
+  [OK] S2PS_tau -> Joint.t
+[OK] 저장: D:\Capstone_design\week5\scripts\..\models\w5_stage3_1_joint_gearcheck.slx
+
+===== BUILD w5_stage3_2_joint =====
+  [OK] 관절 감쇠 = 0.1 N*m/(rad/s)
+  Joint 포트: LConn 2개, RConn 3개 (기대 2, 3)
+  [OK] WorldFrame -> Joint.B
+  [OK] Joint.F -> LinkInertia
+  [OK] World 노드 -> Solver
+  [OK] World 노드 -> Mechanism
+  [OK] Joint.q -> PS2S_q
+  [OK] Joint.w -> PS2S_qd
+  [OK] S2PS_tau -> Joint.t
+[OK] 저장: D:\Capstone_design\week5\scripts\..\models\w5_stage3_2_joint.slx
+
+===== BUILD w5_stage3_2_joint_gearcheck =====
+  [OK] WorldFrame -> Joint.B
+  [OK] Joint.F -> LinkInertia
+  [OK] World -> Solver
+  [OK] World -> Mechanism
+  [OK] Joint.w -> PS2S_qd
+  [OK] S2PS_tau -> Joint.t
+[OK] 저장: D:\Capstone_design\week5\scripts\..\models\w5_stage3_2_joint_gearcheck.slx
+
+===== W5S3 BUILD 끝. [실패]/[경고] 확인 =====

@@ -1,0 +1,125 @@
+4-4 비교 보고서: MATLAB/Simulink vs 이민혁 MuJoCo+Python
+민혁 데이터: 이민혁\stage4\stage4\stage4_4_20261010_193157_123653
+MATLAB 데이터: matlab_results\stage4_4
+판정 기준 출처: [민혁]=README 4-4 §5, [5주차]=3단계 기준, [신규]=새 기준(사용자 승인 2026-10-11). 하드웨어 정확도 기준 아님.
+열 업데이트: MATLAB 통합 시험은 방식 A (1 ms 이산, 구간 평균 전력 정확해). 이 식은 민혁 코드를 받지 못해 CSV 의 매 1 ms 온도 변화에서 추정한 것이다.
+독립 열 시험: MATLAB 은 연속시간 ODE (ode45), 민혁은 0.1 s 단위 업데이트 -> 방식이 다르다.
+
+[0] 지표 정의 확인 (민혁 CSV 에 내 함수를 적용해 summary.json 값이 재현되는지)
+  baseline_fixed25     정착 내 함수 0.894 / summary 0.894 | RMSE 내 함수 0.090390 / summary 0.090390 | 최종 T 내 25.000000 / summary 25.000000 | 최종 입력E 내 0.029571 / summary 0.029571 | 동손E 내 0.012995 / summary 0.012995
+     -> 재현 OK (정착 일치, RMSE·최종 T·최종 입력E 오차 < 1e-9) | 전압 제한 행 수 내 0 / summary 0
+  baseline_thermal25   정착 내 함수 0.894 / summary 0.894 | RMSE 내 함수 0.090390 / summary 0.090390 | 최종 T 내 25.000644 / summary 25.000644 | 최종 입력E 내 0.029571 / summary 0.029571 | 동손E 내 0.012995 / summary 0.012995
+     -> 재현 OK (정착 일치, RMSE·최종 T·최종 입력E 오차 < 1e-9) | 전압 제한 행 수 내 0 / summary 0
+  baseline_thermal80   정착 내 함수 0.894 / summary 0.894 | RMSE 내 함수 0.090417 / summary 0.090417 | 최종 T 내 79.453518 / summary 79.453518 | 최종 입력E 내 0.032292 / summary 0.032292 | 동손E 내 0.015680 / summary 0.015680
+     -> 재현 OK (정착 일치, RMSE·최종 T·최종 입력E 오차 < 1e-9) | 전압 제한 행 수 내 0 / summary 0
+  stress_thermal25     정착 내 함수 1.237 / summary 1.237 | RMSE 내 함수 0.851573 / summary 0.851573 | 최종 T 내 25.006232 / summary 25.006232 | 최종 입력E 내 0.512650 / summary 0.512650 | 동손E 내 0.125732 / summary 0.125732
+     -> 재현 OK (정착 일치, RMSE·최종 T·최종 입력E 오차 < 1e-9) | 전압 제한 행 수 내 6127 / summary 6127
+  stress_thermal80     정착 내 함수 1.244 / summary 1.244 | RMSE 내 함수 0.856759 / summary 0.856759 | 최종 T 내 79.459727 / summary 79.459727 | 최종 입력E 내 0.524861 / summary 0.524861 | 동손E 내 0.140930 / summary 0.140930
+     -> 재현 OK (정착 일치, RMSE·최종 T·최종 입력E 오차 < 1e-9) | 전압 제한 행 수 내 6244 / summary 6244
+  thermal_constant_heat      내 해석식 vs 민혁 해석 열 최대 차 0.000e+00 C | 민혁 온도 vs 해석 열 최대 차 2.842e-13 (summary 2.842e-13)
+  [PASS] thermal_constant_heat 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])         0 <= 1e-09  [신규] (식 확인용, MATLAB 결과 아님)
+  thermal_constant_current   내 해석식 vs 민혁 해석 열 최대 차 1.421e-14 C | 민혁 온도 vs 해석 열 최대 차 9.237e-14 (summary 9.237e-14)
+  [PASS] thermal_constant_current 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])      1.421e-14 <= 1e-09  [신규] (식 확인용, MATLAB 결과 아님)
+  thermal_cooling            내 해석식 vs 민혁 해석 열 최대 차 0.000e+00 C | 민혁 온도 vs 해석 열 최대 차 1.705e-13 (summary 1.705e-13)
+  [PASS] thermal_cooling 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])               0 <= 1e-09  [신규] (식 확인용, MATLAB 결과 아님)
+
+[b] 독립 열 시험 600 s (이상적 열원/전류 지정, 제어기·관절 없음)
+ thermal_constant_heat: T(300 s) MATLAB 102.68698399 / 민혁 102.68698399 / 해석 102.68698399 C
+  [PASS] thermal_constant_heat MATLAB 온도 vs 해석식 최대 차 [C]                5.542e-13 <= 1e-08  [민혁]
+  [PASS] thermal_constant_heat MATLAB 열 에너지 수지 잔차 최대 [J]                5.798e-11 <= 0.0001  [민혁] (입력-방열-C*dT, 로그 격자 0.1 s)
+  [PASS] thermal_constant_heat MATLAB vs 민혁 온도 최대 차 [C]                 5.969e-13 <= 2e-08  [신규] (두 방식 모두 해석식에서 1e-8 이내이면 서로 2e-8 이내)
+ thermal_constant_current: T(300 s) MATLAB 49.95311814 / 민혁 49.95311814 / 해석 49.95311814 C
+  [PASS] thermal_constant_current MATLAB 온도 vs 해석식 최대 차 [C]             1.208e-13 <= 1e-08  [민혁]
+  [PASS] thermal_constant_current MATLAB 열 에너지 수지 잔차 최대 [J]             7.034e-12 <= 0.0001  [민혁] (입력-방열-C*dT, 로그 격자 0.1 s)
+  [PASS] thermal_constant_current MATLAB vs 민혁 온도 최대 차 [C]              1.279e-13 <= 2e-08  [신규] (두 방식 모두 해석식에서 1e-8 이내이면 서로 2e-8 이내)
+ thermal_cooling: T(300 s) MATLAB 37.27215881 / 민혁 37.27215881 / 해석 37.27215881 C
+  [PASS] thermal_cooling MATLAB 온도 vs 해석식 최대 차 [C]                      1.705e-13 <= 1e-08  [민혁]
+  [PASS] thermal_cooling MATLAB 열 에너지 수지 잔차 최대 [J]                      8.185e-12 <= 0.0001  [민혁] (입력-방열-C*dT, 로그 격자 0.1 s)
+  [PASS] thermal_cooling MATLAB vs 민혁 온도 최대 차 [C]                       2.629e-13 <= 2e-08  [신규] (두 방식 모두 해석식에서 1e-8 이내이면 서로 2e-8 이내)
+
+[d] 통합 2 s (평균 인버터, 열 업데이트 1 ms)
+ baseline_fixed25: MATLAB vs 민혁
+  [PASS] baseline_fixed25 최대 각도 차 [rad]                                 6.906e-06 <= 0.001  [5주차]
+  [PASS] baseline_fixed25 최대 샘플 iq 차 [A]                                0.0002074 <= 0.01  [5주차]
+  [PASS] baseline_fixed25 최대 관절 토크 차 [N*m]                              0.0003111 <= 0.015  [5주차]
+  [PASS] baseline_fixed25 최대 모터 토크 차 [N*m]                              6.222e-05 <= 0.003  [5주차]
+  [PASS] baseline_fixed25 2% 정착시간 차 [s]                                 0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+  [PASS] baseline_fixed25 최대 권선 온도 차 [C]                                0 <= 0.001  [신규] (1 ms 업데이트 vs 0.1 ms 세분 비교의 민혁 허용치 0.001 C 값을 재사용)
+  [PASS] baseline_fixed25 최종 전기 입력 에너지 상대 차                             0.0004509 <= 0.001  [신규] (MATLAB 0.029585 / 민혁 0.029571 J)
+  [PASS] baseline_fixed25 최종 동손 에너지 상대 차                                0.0002635 <= 0.001  [신규] (MATLAB 0.012991 / 민혁 0.012995 J)
+  [PASS] baseline_fixed25 MATLAB 열 에너지 수지 잔차 최대 [J]                     2.711e-20 <= 1e-06  [민혁] (이 항은 방식 A 식이 정확해라 구성상 0 에 가깝다. 독립 검증은 [b])
+  [PASS] baseline_fixed25 MATLAB 전기 변환 수지 잔차 최대 [J]                     8.558e-09 <= 1e-07  [민혁]
+  [PASS] baseline_fixed25 MATLAB 전체 수지 잔차 최대 [J]                        4.97e-08 <= 0.002  [민혁]
+  (참고) 추종 RMSE MATLAB 0.090391 / 민혁 0.090390 rad, 최종 T MATLAB 25.000000 / 민혁 25.000000 C, 최대 T MATLAB 25.000000 / 민혁 25.000000 C
+  (참고) 최대 iq MATLAB 0.708286 / 민혁 0.708493 A (샘플 100 us), 전압 제한 행 MATLAB 0 / 민혁 0, 최종 대기 에너지 MATLAB 0.000e+00 J
+  (참고) 최종 전체 수지 잔차 MATLAB 4.970e-08 / 민혁 -1.665e-05 J, 최대 |잔차| MATLAB 4.970e-08 / 민혁 1.665e-05 J (부호·정의 규칙 차이 가능)
+ baseline_thermal25: MATLAB vs 민혁
+  [PASS] baseline_thermal25 최대 각도 차 [rad]                               6.906e-06 <= 0.001  [5주차]
+  [PASS] baseline_thermal25 최대 샘플 iq 차 [A]                              0.0002074 <= 0.01  [5주차]
+  [PASS] baseline_thermal25 최대 관절 토크 차 [N*m]                            0.0003111 <= 0.015  [5주차]
+  [PASS] baseline_thermal25 최대 모터 토크 차 [N*m]                            6.222e-05 <= 0.003  [5주차]
+  [PASS] baseline_thermal25 2% 정착시간 차 [s]                               0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+  [PASS] baseline_thermal25 최대 권선 온도 차 [C]                              2e-07 <= 0.001  [신규] (1 ms 업데이트 vs 0.1 ms 세분 비교의 민혁 허용치 0.001 C 값을 재사용)
+  [PASS] baseline_thermal25 최종 전기 입력 에너지 상대 차                           0.0004509 <= 0.001  [신규] (MATLAB 0.029585 / 민혁 0.029571 J)
+  [PASS] baseline_thermal25 최종 동손 에너지 상대 차                              0.0002635 <= 0.001  [신규] (MATLAB 0.012991 / 민혁 0.012995 J)
+  [PASS] baseline_thermal25 MATLAB 열 에너지 수지 잔차 최대 [J]                   1.694e-21 <= 1e-06  [민혁] (이 항은 방식 A 식이 정확해라 구성상 0 에 가깝다. 독립 검증은 [b])
+  [PASS] baseline_thermal25 MATLAB 전기 변환 수지 잔차 최대 [J]                   8.557e-09 <= 1e-07  [민혁]
+  [PASS] baseline_thermal25 MATLAB 전체 수지 잔차 최대 [J]                      4.97e-08 <= 0.002  [민혁]
+  (참고) 추종 RMSE MATLAB 0.090391 / 민혁 0.090390 rad, 최종 T MATLAB 25.000644 / 민혁 25.000644 C, 최대 T MATLAB 25.000647 / 민혁 25.000647 C
+  (참고) 최대 iq MATLAB 0.708286 / 민혁 0.708493 A (샘플 100 us), 전압 제한 행 MATLAB 0 / 민혁 0, 최종 대기 에너지 MATLAB 0.000e+00 J
+  (참고) 최종 전체 수지 잔차 MATLAB 4.970e-08 / 민혁 -1.665e-05 J, 최대 |잔차| MATLAB 4.970e-08 / 민혁 1.665e-05 J (부호·정의 규칙 차이 가능)
+ baseline_thermal80: MATLAB vs 민혁
+  [PASS] baseline_thermal80 최대 각도 차 [rad]                               6.957e-06 <= 0.001  [5주차]
+  [PASS] baseline_thermal80 최대 샘플 iq 차 [A]                              0.0001929 <= 0.01  [5주차]
+  [PASS] baseline_thermal80 최대 관절 토크 차 [N*m]                            0.0002893 <= 0.015  [5주차]
+  [PASS] baseline_thermal80 최대 모터 토크 차 [N*m]                            5.787e-05 <= 0.003  [5주차]
+  [PASS] baseline_thermal80 2% 정착시간 차 [s]                               0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+  [PASS] baseline_thermal80 최대 권선 온도 차 [C]                              2.354e-07 <= 0.001  [신규] (1 ms 업데이트 vs 0.1 ms 세분 비교의 민혁 허용치 0.001 C 값을 재사용)
+  [PASS] baseline_thermal80 최종 전기 입력 에너지 상대 차                           0.0003894 <= 0.001  [신규] (MATLAB 0.032305 / 민혁 0.032292 J)
+  [PASS] baseline_thermal80 최종 동손 에너지 상대 차                              0.0002579 <= 0.001  [신규] (MATLAB 0.015676 / 민혁 0.015680 J)
+  [PASS] baseline_thermal80 MATLAB 열 에너지 수지 잔차 최대 [J]                   2.228e-14 <= 1e-06  [민혁] (이 항은 방식 A 식이 정확해라 구성상 0 에 가깝다. 독립 검증은 [b])
+  [PASS] baseline_thermal80 MATLAB 전기 변환 수지 잔차 최대 [J]                   8.035e-09 <= 1e-07  [민혁]
+  [PASS] baseline_thermal80 MATLAB 전체 수지 잔차 최대 [J]                      4.896e-08 <= 0.002  [민혁]
+  (참고) 추종 RMSE MATLAB 0.090419 / 민혁 0.090417 rad, 최종 T MATLAB 79.453518 / 민혁 79.453518 C, 최대 T MATLAB 80.000000 / 민혁 80.000000 C
+  (참고) 최대 iq MATLAB 0.684161 / 민혁 0.684354 A (샘플 100 us), 전압 제한 행 MATLAB 0 / 민혁 0, 최종 대기 에너지 MATLAB 0.000e+00 J
+  (참고) 최종 전체 수지 잔차 MATLAB 4.896e-08 / 민혁 -1.652e-05 J, 최대 |잔차| MATLAB 4.896e-08 / 민혁 1.652e-05 J (부호·정의 규칙 차이 가능)
+ stress_thermal25: MATLAB vs 민혁
+  [PASS] stress_thermal25 최대 각도 차 [rad]                                 0.0002616 <= 0.001  [5주차]
+  [PASS] stress_thermal25 최대 샘플 iq 차 [A]                                0.001424 <= 0.01  [5주차]
+  [PASS] stress_thermal25 최대 관절 토크 차 [N*m]                              0.002136 <= 0.015  [5주차]
+  [PASS] stress_thermal25 최대 모터 토크 차 [N*m]                              0.0004272 <= 0.003  [5주차]
+  [PASS] stress_thermal25 2% 정착시간 차 [s]                                 0 <= 0.01  [5주차] (MATLAB 1.237 / 민혁 1.237 s)
+  [PASS] stress_thermal25 최대 권선 온도 차 [C]                                4.601e-06 <= 0.001  [신규] (1 ms 업데이트 vs 0.1 ms 세분 비교의 민혁 허용치 0.001 C 값을 재사용)
+  [PASS] stress_thermal25 최종 전기 입력 에너지 상대 차                             0.0002368 <= 0.001  [신규] (MATLAB 0.512771 / 민혁 0.512650 J)
+  [PASS] stress_thermal25 최종 동손 에너지 상대 차                                0.0007334 <= 0.001  [신규] (MATLAB 0.125640 / 민혁 0.125732 J)
+  [PASS] stress_thermal25 MATLAB 열 에너지 수지 잔차 최대 [J]                     0 <= 1e-06  [민혁] (이 항은 방식 A 식이 정확해라 구성상 0 에 가깝다. 독립 검증은 [b])
+  [PASS] stress_thermal25 MATLAB 전기 변환 수지 잔차 최대 [J]                     9.909e-08 <= 1e-07  [민혁]
+  [PASS] stress_thermal25 MATLAB 전체 수지 잔차 최대 [J]                        3.586e-07 <= 0.002  [민혁]
+  (참고) 추종 RMSE MATLAB 0.851503 / 민혁 0.851573 rad, 최종 T MATLAB 25.006228 / 민혁 25.006232 C, 최대 T MATLAB 25.006244 / 민혁 25.006249 C
+  (참고) 최대 iq MATLAB 1.993968 / 민혁 1.994138 A (샘플 100 us), 전압 제한 행 MATLAB 6126 / 민혁 6127, 최종 대기 에너지 MATLAB 0.000e+00 J
+  (참고) 최종 전체 수지 잔차 MATLAB 3.586e-07 / 민혁 -1.507e-04 J, 최대 |잔차| MATLAB 3.586e-07 / 민혁 1.507e-04 J (부호·정의 규칙 차이 가능)
+ stress_thermal80: MATLAB vs 민혁
+  [PASS] stress_thermal80 최대 각도 차 [rad]                                 0.0002384 <= 0.001  [5주차]
+  [PASS] stress_thermal80 최대 샘플 iq 차 [A]                                0.001093 <= 0.01  [5주차]
+  [PASS] stress_thermal80 최대 관절 토크 차 [N*m]                              0.001639 <= 0.015  [5주차]
+  [PASS] stress_thermal80 최대 모터 토크 차 [N*m]                              0.0003279 <= 0.003  [5주차]
+  [PASS] stress_thermal80 2% 정착시간 차 [s]                                 2.22e-16 <= 0.01  [5주차] (MATLAB 1.244 / 민혁 1.244 s)
+  [PASS] stress_thermal80 최대 권선 온도 차 [C]                                4.922e-06 <= 0.001  [신규] (1 ms 업데이트 vs 0.1 ms 세분 비교의 민혁 허용치 0.001 C 값을 재사용)
+  [PASS] stress_thermal80 최종 전기 입력 에너지 상대 차                             0.0001845 <= 0.001  [신규] (MATLAB 0.524958 / 민혁 0.524861 J)
+  [PASS] stress_thermal80 최종 동손 에너지 상대 차                                0.0006998 <= 0.001  [신규] (MATLAB 0.140831 / 민혁 0.140930 J)
+  [PASS] stress_thermal80 MATLAB 열 에너지 수지 잔차 최대 [J]                     2.684e-14 <= 1e-06  [민혁] (이 항은 방식 A 식이 정확해라 구성상 0 에 가깝다. 독립 검증은 [b])
+  [PASS] stress_thermal80 MATLAB 전기 변환 수지 잔차 최대 [J]                     8.106e-08 <= 1e-07  [민혁]
+  [PASS] stress_thermal80 MATLAB 전체 수지 잔차 최대 [J]                        3.49e-07 <= 0.002  [민혁]
+  (참고) 추종 RMSE MATLAB 0.856698 / 민혁 0.856759 rad, 최종 T MATLAB 79.459722 / 민혁 79.459727 C, 최대 T MATLAB 80.000000 / 민혁 80.000000 C
+  (참고) 최대 iq MATLAB 1.964836 / 민혁 1.965047 A (샘플 100 us), 전압 제한 행 MATLAB 6244 / 민혁 6244, 최종 대기 에너지 MATLAB 0.000e+00 J
+  (참고) 최종 전체 수지 잔차 MATLAB 3.490e-07 / 민혁 -1.377e-04 J, 최대 |잔차| MATLAB 3.490e-07 / 민혁 1.377e-04 J (부호·정의 규칙 차이 가능)
+
+ 사례 간 관찰 (합격 조건 아님)
+  baseline 24 V: 최대 iq 25 C 고정 0.70829 / 열 25 C 0.70829 / 열 80 C 0.68416 A (MATLAB), 민혁 0.70849 / 0.70849 / 0.68435
+  baseline fixed25 vs thermal25 최대 각도 차 MATLAB 2.064e-09 / 민혁 2.065e-09 rad
+  MATLAB baseline_fixed25 vs MATLAB 4-3 평균 모델(main_avg) 최대 각도 차 7.584e-08 rad, 최대 iq 차 2.423e-06 A (같은 3-2 모델 복사 두 번째 사용, 관측값)
+
+[요약]
+  검사 67개 중 67개 통과, 0개 실패
+  하지 않은 것: PWM+열 통합(민혁도 안 함), 열 업데이트 0.1 ms 세분 비교, 25/12.5/6.25 us 기동 수렴(MATLAB 은 가변 스텝), MuJoCo 전용 검사, 별도 PWM 동손 시험.
+  PASS 는 위 기준(출처 표시) 안에 들어왔다는 뜻이며 실제 하드웨어와 일치한다는 뜻이 아니다. [신규] 기준은 사용자 승인(2026-10-11)을 받았다.

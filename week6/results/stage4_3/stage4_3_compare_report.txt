@@ -1,0 +1,83 @@
+4-3 비교 보고서: MATLAB/Simulink vs 이민혁 MuJoCo+Python
+민혁 데이터: 이민혁\stage4\stage4\stage4_3_20261010_173622_689997
+MATLAB 데이터: matlab_results\stage4_3
+판정 기준 출처: [민혁]=README 4-3 §8(e), [5주차]=3단계 잠정 기준 재사용, [신규]=새 기준(사용자 승인 2026-10-11). 하드웨어 정확도 기준 아님.
+
+[0] 지표 정의 확인 (민혁 CSV 에 내 함수를 적용해 summary.json 값이 재현되는지)
+  pwm      정착 내 함수 0.893 s / summary 0.893 s | RMSE 내 함수 0.090374 / summary 0.090374
+  average  정착 내 함수 0.894 s / summary 0.894 s | RMSE 내 함수 0.090391 / summary 0.090391
+
+[a] 변환식 확인: 민혁 CSV 의 vd/vq/전기각으로 내 duty 식을 계산해 민혁 duty 와 비교
+  [PASS] 내 duty 식 vs 민혁 duty (최대 차)                                 0 <= 1e-09  [신규] (식 확인용, MATLAB 결과 아님)
+
+[e] 시작 60 ms (5 ms 에 0.3 rad)
+ MATLAB 수렴 (기준: 최대 스텝 1.25 us 와의 차이, 100 us 격자)
+  [PASS] MATLAB 5 us vs 1.25 us 최대 차 각도 [rad]                       2.448e-09 <= 0.0005  [민혁]
+  [PASS] MATLAB 5 us vs 1.25 us 최대 차 속도 [rad/s]                     7.289e-08 <= 0.01  [민혁]
+  [PASS] MATLAB 5 us vs 1.25 us 최대 차 샘플 iq [A]                      8.299e-08 <= 0.003  [민혁]
+  [PASS] MATLAB 5 us vs 1.25 us 최대 차 주기 평균 iq [A]                   4.708e-07 <= 0.003  [민혁]
+  [PASS] 간격을 줄이면 각도 차가 감소: 5 us 2.448e-09 -> 2.5 us 2.356e-09 rad
+ MATLAB(1.25 us) vs 민혁 PWM(1.25 us)
+  [PASS] 최대 각도 차 [rad]                                              6.839e-07 <= 0.001  [5주차]
+  [PASS] 최대 샘플 iq 차 [A]                                             1.278e-05 <= 0.01  [5주차]
+  [PASS] 최대 주기 평균 iq 차 [A]                                          1.395e-05 <= 0.01  [5주차]
+  [PASS] 최대 관절 토크 차 [N*m]                                           1.917e-05 <= 0.015  [5주차]
+  [PASS] 최대 모터 토크 차 [N*m]                                           3.834e-06 <= 0.003  [5주차]
+  (참고) 최대 속도 차 1.593e-05 rad/s
+ MATLAB 평균(5 us) vs 민혁 평균 (MuJoCo / 독립 ODE)
+   vs MuJoCo   최대 각도 차 7.350e-07 rad | 최대 샘플 iq 차 4.142e-05 A | 최대 주기 평균 iq 차 4.142e-05 A
+   vs 독립 ODE   최대 각도 차 8.329e-09 rad | 최대 샘플 iq 차 3.824e-07 A | 최대 주기 평균 iq 차 2.619e-06 A
+
+[c] 회전축 고정: vd=0, vq=1 V, 0.1 s, 초기 전류 0
+ held_pwm10k: 내 정확해 vs 민혁 CSV 최대 차 7.621e-13 A (정확해 검증용)
+  [PASS] held_pwm10k MATLAB iq vs 정확해 최대 차 [A]                      1.128e-06 <= 0.0001  [신규]
+  [PASS] held_pwm10k MATLAB id vs 정확해 최대 차 [A]                      3.839e-09 <= 0.0001  [신규]
+  [PASS] held_pwm10k 마지막 10 ms 평균 iq 민혁과 차 [A]                      1.09e-06 <= 0.0001  [신규] (MATLAB 1.99984289 / 민혁 1.99984398)
+  [PASS] held_pwm10k 마지막 주기 iq 리플(p-p) 민혁과 상대차                      5.618e-07 <= 0.05  [신규] (MATLAB 0.00927879 / 민혁 0.0092788 A)
+  [PASS] held_pwm10k 선간 전압이 -24/0/+24 V 중 하나 (최대 거리 [V])            0 <= 1e-06  [신규]
+  [PASS] held_pwm10k 세 상전압 합 최대 [V]                                 7.199e-11 <= 1e-09  [신규]
+ held_pwm20k: 내 정확해 vs 민혁 CSV 최대 차 6.453e-13 A (정확해 검증용)
+  [PASS] held_pwm20k MATLAB iq vs 정확해 최대 차 [A]                      9.059e-07 <= 0.0001  [신규]
+  [PASS] held_pwm20k MATLAB id vs 정확해 최대 차 [A]                      1.348e-09 <= 0.0001  [신규]
+  [PASS] held_pwm20k 마지막 10 ms 평균 iq 민혁과 차 [A]                      8.739e-07 <= 0.0001  [신규] (MATLAB 1.99984311 / 민혁 1.99984398)
+  [PASS] held_pwm20k 마지막 주기 iq 리플(p-p) 민혁과 상대차                      4.552e-07 <= 0.05  [신규] (MATLAB 0.0046394 / 민혁 0.0046394 A)
+  [PASS] held_pwm20k 선간 전압이 -24/0/+24 V 중 하나 (최대 거리 [V])            0 <= 1e-06  [신규]
+  [PASS] held_pwm20k 세 상전압 합 최대 [V]                                 7.199e-11 <= 1e-09  [신규]
+ held_avg: 내 정확해 vs 민혁 CSV 최대 차 9.814e-14 A (정확해 검증용)
+  [PASS] held_avg MATLAB iq vs 정확해 최대 차 [A]                         1.517e-08 <= 0.0001  [신규]
+  [PASS] held_avg MATLAB id vs 정확해 최대 차 [A]                         0 <= 0.0001  [신규]
+  [PASS] held_avg 마지막 10 ms 평균 iq 민혁과 차 [A]                         2.755e-11 <= 0.0001  [신규] (MATLAB 1.99984398 / 민혁 1.99984398)
+  [PASS] held_avg 평균 모델 iq 리플(p-p) [A]                              9.126e-07 <= 0.0001  [신규] (민혁 9.13e-07 A)
+  [PASS] held_avg 세 상전압 합 최대 [V]                                    0 <= 1e-09  [신규]
+  20 kHz / 10 kHz 리플 비: MATLAB 0.5000 / 민혁 0.5000 (20 kHz 에서 줄어드는지 확인)
+  [PASS] held_pwm10k 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]    2.957e-10 <= 0.001  [신규]
+  [PASS] held_pwm20k 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]    5.747e-10 <= 0.001  [신규]
+
+[d] 통합 2 s (0.2 s 에 0.3 rad)
+ pwm: MATLAB vs 민혁 (이상적 PWM)
+  [PASS] pwm 최대 각도 차 [rad]                                          6.614e-05 <= 0.001  [5주차]
+  [PASS] pwm 최대 샘플 iq 차 [A]                                         0.0002904 <= 0.01  [5주차]
+  [PASS] pwm 최대 주기 평균 iq 차 [A]                                      0.0003107 <= 0.01  [5주차]
+  [PASS] pwm 최대 관절 토크 차 [N*m]                                       0.0004355 <= 0.015  [5주차]
+  [PASS] pwm 최대 모터 토크 차 [N*m]                                       8.711e-05 <= 0.003  [5주차]
+  [PASS] pwm 2% 정착시간 차 [s]                                          0.001 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.893 s)
+  (참고) 추종 RMSE MATLAB 0.090391 / 민혁 0.090374 rad, 최종 오차 MATLAB 7.785e-05 / 민혁 7.718e-05 rad
+  (참고) 전압 지령 제한 횟수 MATLAB 0 / 민혁 0
+  [PASS] pwm 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]            4.541e-09 <= 0.001  [신규] (duty 로그 정렬: 행 k-1 duty -> 주기 [k-1,k])
+ avg: MATLAB vs 민혁 (평균 인버터)
+  [PASS] avg 최대 각도 차 [rad]                                          1.362e-06 <= 0.001  [5주차]
+  [PASS] avg 최대 샘플 iq 차 [A]                                         4.142e-05 <= 0.01  [5주차]
+  [PASS] avg 최대 주기 평균 iq 차 [A]                                      4.142e-05 <= 0.01  [5주차]
+  [PASS] avg 최대 관절 토크 차 [N*m]                                       6.212e-05 <= 0.015  [5주차]
+  [PASS] avg 최대 모터 토크 차 [N*m]                                       1.242e-05 <= 0.003  [5주차]
+  [PASS] avg 2% 정착시간 차 [s]                                          0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+  (참고) 추종 RMSE MATLAB 0.090391 / 민혁 0.090391 rad, 최종 오차 MATLAB 7.786e-05 / 민혁 7.787e-05 rad
+  (참고) 전압 지령 제한 횟수 MATLAB 0 / 민혁 0
+  [PASS] avg 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]            1.398e-11 <= 0.001  [신규] (duty 로그 정렬: 행 k-1 duty -> 주기 [k-1,k])
+ MATLAB PWM vs MATLAB 평균 (같은 모델 두 인버터)
+  최대 각도 차 MATLAB 1.025e-06 rad / 민혁 6.712e-05 rad ; 주기 평균 iq RMS 차 MATLAB 1.383e-06 A / 민혁 1.089e-04 A (관측값, 합격 조건 아님)
+ 주기 내 iq 최대-최소(스위칭 시각 포함): MATLAB 최대 0.02393 A / 민혁 최대 0.02393 A (제어 과도응답 변화 포함, 관측값)
+
+[요약]
+  검사 43개 중 43개 통과, 0개 실패
+  PASS 는 위 기준(출처 표시) 안에 들어왔다는 뜻이며 실제 하드웨어와 일치한다는 뜻이 아니다. [신규] 기준은 사용자 승인(2026-10-11)을 받았다.

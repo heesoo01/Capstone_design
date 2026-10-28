@@ -1,0 +1,17 @@
+<section id="summary" data-transition="fade" style="background:#F4F6F9;color:#17202C;font-family:'Noto Sans KR','Malgun Gothic',Arial,sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:28px;font-weight:700;color:#2A5DB0;letter-spacing:2px">결론 · 액추에이터 = 모터 + 드라이브 + 감속기</p>
+<h2 style="font-size:54px;font-weight:700;line-height:1.15">단계마다 액추에이터를 한 부분씩 바꿔 Simulink에서 구현했다</h2>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div style="width:380px;display:flex;flex-direction:column;gap:6px;background:#FBFCFD;padding:20px 24px;border:3px solid #B3560F;border-radius:14px"><p style="font-size:28px;font-weight:700">모터 (PMSM)</p><p style="font-size:24px;color:#586374">2단계에서 추가</p></div>
+<p style="font-size:36px;color:#586374">→</p>
+<div style="width:380px;display:flex;flex-direction:column;gap:6px;background:#FBFCFD;padding:20px 24px;border:3px solid #2A5DB0;border-radius:14px"><p style="font-size:28px;font-weight:700">드라이브</p><p style="font-size:24px;color:#586374">전류 PI + 평균 인버터, 2단계에서 추가</p></div>
+<p style="font-size:36px;color:#586374">→</p>
+<div style="width:380px;display:flex;flex-direction:column;gap:6px;background:#FBFCFD;padding:20px 24px;border:3px solid #B3560F;border-radius:14px"><p style="font-size:28px;font-weight:700">감속기</p><p style="font-size:24px;color:#586374">기어비 5 + 회전자 관성, 3단계에서 추가</p></div>
+<p style="font-size:36px;color:#586374">→</p>
+<div style="width:380px;display:flex;flex-direction:column;gap:6px;background:#FBFCFD;padding:20px 24px;border:3px solid #1F7A45;border-radius:14px"><p style="font-size:28px;font-weight:700">관절 + 막대 부하</p><p style="font-size:24px;color:#586374">1단계부터 (위치 PD 포함)</p></div>
+</div>
+<table style="font-size:24px;color:#17202C;font-family:'Noto Sans KR','Malgun Gothic',Arial,sans-serif"><tr><th style="width:16%"></th><th style="width:22%">1단계</th><th style="width:31%">2단계</th><th style="width:31%">3단계</th></tr><tr><td><b>관절을 미는 쪽</b></td><td>이상 토크 (모터 없음)</td><td>모터 + 드라이브</td><td>모터 + 드라이브 + 기어비 5</td></tr><tr><td><b>새로 생긴 현상</b></td><td>없음 (기준선)</td><td>전류 지연, 역기전력, 전압 포화, 토크 상한 0.6 N·m</td><td>모터 속도·토크 5배, 반사 관성, 토크 상한 3 N·m</td></tr><tr><td><b>두 환경 최대 차이</b></td><td>각도 8.7e-6 rad</td><td>각도 5.3e-6 rad, iq 1.2e-4 A</td><td>각도 7.2e-6 rad, iq 3.1e-4 A</td></tr></table>
+<p style="font-size:28px;line-height:1.4;color:#586374">두 환경 모두 같은 액추에이터 모델을 구현할 수 있고 결과가 같다 (차이는 허용치의 1/30 이하). MuJoCo는 전기 쪽을 코드로 넣어야 한다. 한계: 가정값이고 하드웨어 검증이 아니며, 시뮬레이터 선정 근거는 아니다</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#586374">5주차 진행 보고 · 5 / 9</p>
+<aside>1단계는 액추에이터 자리에 이상 토크를 가정한 기준선이고, 2단계에서 그 자리에 모터와 드라이브를 넣고, 3단계에서 모터 뒤에 감속기를 붙였습니다. 기어가 없으면 전류 지령 제한 ±2 A가 토크 상한 0.6 N·m가 되고, 기어비 5에서는 3 N·m가 됩니다. 같은 위치 명령(목표 2 rad, 24 V)에서 정착시간이 2단계 1.193 s에서 3단계 0.935 s로 빨라진 것은 이 토크 상한 차이 때문입니다. 두 환경의 차이는 모든 단계에서 허용치의 1/30 이하였고, 이것은 가정 모델을 같게 계산한다는 뜻이지 어느 시뮬레이터가 낫다는 뜻이 아닙니다.</aside>
+</section>

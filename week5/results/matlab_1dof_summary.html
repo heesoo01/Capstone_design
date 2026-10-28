@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>MATLAB Simscape 1자유도 검증 요약</title>
+<style>
+  @page { size: A4; margin: 11mm 12mm; }
+  body { font-family: "Malgun Gothic", "맑은 고딕", sans-serif; font-size: 9.2pt; color: #1a1a1a; line-height: 1.38; }
+  tr { page-break-inside: avoid; }
+  h1 { font-size: 17pt; margin: 0 0 2mm; }
+  h2 { font-size: 12pt; margin: 6mm 0 2mm; padding-bottom: 1mm; border-bottom: 1.5px solid #2b5797; color: #2b5797; }
+  .meta { color: #555; font-size: 9pt; margin-bottom: 3mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1.5mm 0 2mm; }
+  th, td { border: 1px solid #b8b8b8; padding: 1mm 2mm; vertical-align: top; }
+  th { background: #eef2f8; text-align: left; }
+  td.v { font-family: Consolas, "Malgun Gothic", monospace; white-space: nowrap; }
+  td.cmp { background: #fffdf2; width: 22%; }
+  .note { font-size: 9pt; color: #444; }
+  .flow { background: #f5f7fa; border: 1px solid #c9d3e3; padding: 2.5mm; font-size: 9.5pt; }
+  .warn li { margin-bottom: 1mm; }
+  ul { margin: 1mm 0 1mm 5mm; padding: 0; }
+  .small { font-size: 8.5pt; color: #666; }
+  svg { width: 100%; height: auto; display: block; margin: 2mm 0; border: 1px solid #ddd; }
+</style>
+</head>
+<body>
+
+<h1>MATLAB Simscape 1자유도 액추에이터 검증 요약</h1>
+<div class="meta">종합설계 5주차 · 환경: MATLAB R2026a (Simulink, Simscape, Simscape Multibody / Driveline / Electrical) · 모델 파일: week5/scripts/s1_mechanical.slx</div>
+
+<h2>1. 무엇을 검증했나</h2>
+<p>1자유도 회전 관절 하나에 <b>구동 체인(토크원 → 감속기 → 회전마찰)과 PID 위치제어</b>를 붙인 폐루프 시뮬레이션이다. 질량·관성은 구성 요소 중 하나일 뿐이다.
+목적은 시뮬레이터 확정이 아니라 <b>"이 구조(Pick-and-Place 시나리오)가 Simscape에서 구현 가능한가"</b>를 확인하는 테스트다.</p>
+
+<h2>2. 시나리오와 입력</h2>
+<table>
+<tr><th style="width:24%">항목</th><th>내용</th><th class="cmp">비교 메모</th></tr>
+<tr><td>형상</td><td>수직면 진자형 1관절. 회전축 = 수평(월드 Y), 링크는 +X 방향 0.3 m, 중력 −Z. q=0°는 팔이 수평인 자세 (q=90°가 위/아래인지 부호는 미확인)</td><td class="cmp"></td></tr>
+<tr><td>목표각 입력</td><td>0° → 30° (t=0.5 s) → 60° (t=2.5 s) → 90° (t=4.5 s), 30°씩 계단 입력</td><td class="cmp"></td></tr>
+<tr><td>부하 변화 입력</td><td>점질량 0.5 kg → 0.7 kg (t=2.0 s, Pick) → 0.5 kg (t=6.0 s, Place). 한 번의 연속 시뮬레이션에서 변화</td><td class="cmp"></td></tr>
+<tr><td>시뮬레이션 시간</td><td>8 s, Simulink 가변 스텝 (MaxStep = auto)</td><td class="cmp"></td></tr>
+</table>
+
+<svg viewBox="0 0 640 170" xmlns="http://www.w3.org/2000/svg" font-family="Malgun Gothic, sans-serif" font-size="10">
+  <!-- angle ref panel -->
+  <text x="10" y="14" font-weight="bold">목표각 (deg)</text>
+  <line x1="40" y1="20" x2="40" y2="75" stroke="#999"/><line x1="40" y1="75" x2="620" y2="75" stroke="#999"/>
+  <polyline fill="none" stroke="#2b5797" stroke-width="2" points="40,75 76,75 76,60 221,60 221,45 366,45 366,30 620,30"/>
+  <text x="44" y="87" fill="#666">0</text>
+  <text x="82" y="56" fill="#2b5797">30°</text><text x="227" y="41" fill="#2b5797">60°</text><text x="372" y="26" fill="#2b5797">90°</text>
+  <!-- mass panel -->
+  <text x="10" y="102" font-weight="bold">링크 질량 (kg)</text>
+  <line x1="40" y1="108" x2="40" y2="158" stroke="#999"/><line x1="40" y1="158" x2="620" y2="158" stroke="#999"/>
+  <polyline fill="none" stroke="#c0504d" stroke-width="2" points="40,140 185,140 185,118 475,118 475,140 620,140"/>
+  <text x="540" y="136" fill="#c0504d">0.5</text><text x="290" y="114" fill="#c0504d">0.7 (부하)</text>
+  <!-- time ticks -->
+  <g fill="#666">
+    <text x="38" y="168">0</text><text x="68" y="168">0.5</text><text x="172" y="168">2.0</text><text x="212" y="168">2.5</text><text x="357" y="168">4.5</text><text x="466" y="168">6.0</text><text x="604" y="168">8 s</text>
+  </g>
+</svg>
+
+<h2>3. 구조 (신호 흐름)</h2>
+<div class="flow">
+목표각 − 현재각(관절 위치 센싱, deg) → <b>PID</b> → 부호반전(−1) → <b>이상적 토크원</b>(모터 대용) → <b>감속기 50:1</b> → <b>회전마찰</b> → Rotational Multibody Interface → <b>회전 관절</b> → 링크 → 점질량(시변)
+</div>
+<p class="note">감속기 출력축 방향이 opposite라 PID 출력에 −1을 넣어야 안정했다 (넣지 않으면 발산).</p>
+
+<h2>4. 파라미터</h2>
+<table>
+<tr><th style="width:15%">구분</th><th style="width:27%">항목</th><th style="width:26%">값</th><th class="cmp">비교 메모</th></tr>
+<tr><td>중력</td><td>GravityVector</td><td class="v">[0 0 −9.80665] m/s²</td><td class="cmp"></td></tr>
+<tr><td rowspan="3">링크</td><td>길이(오프셋)</td><td class="v">0.3 m</td><td class="cmp"></td></tr>
+<tr><td>점질량 (CoM = 0)</td><td class="v">0.5 kg / 부하 0.7 kg</td><td class="cmp"></td></tr>
+<tr><td>시각화용 원통</td><td class="v">r=0.01 m, L=0.3 m, 0.001 kg</td><td class="cmp"></td></tr>
+<tr><td rowspan="2">관절</td><td>토크 입력 / 모션</td><td class="v">InputTorque / ComputedMotion</td><td class="cmp"></td></tr>
+<tr><td>스프링 / 내부 감쇠</td><td class="v">0 / 0</td><td class="cmp"></td></tr>
+<tr><td rowspan="3">감속기</td><td>감속비</td><td class="v">50 (출력 반대방향)</td><td class="cmp"></td></tr>
+<tr><td>효율 모델</td><td class="v">off</td><td class="cmp"></td></tr>
+<tr><td>백래시</td><td class="v">꺼짐<br><span class="small">(설정값 0.5° ≈ 0.873 mm, r_base 0.1 m)</span></td><td class="cmp"></td></tr>
+<tr><td rowspan="3">마찰</td><td>점성계수</td><td class="v">0.01</td><td class="cmp"></td></tr>
+<tr><td>쿨롱 토크</td><td class="v">0.001 N·m</td><td class="cmp"></td></tr>
+<tr><td>브레이크어웨이 토크 / 속도</td><td class="v">0.001 N·m / 0.1</td><td class="cmp"></td></tr>
+<tr><td rowspan="2">제어기</td><td>PID (연속시간)</td><td class="v">Kp 0.05 · Ki 0.01 · Kd 0.005</td><td class="cmp"></td></tr>
+<tr><td>입력 / 출력</td><td class="v">오차(deg) / 모터측 토크 지령</td><td class="cmp"></td></tr>
+<tr><td>해석</td><td>일관성 허용오차(초기화)</td><td class="v">Abs/Rel 0.05, 반복 200</td><td class="cmp"></td></tr>
+</table>
+<p class="note">참고 크기: 최대 중력 토크 m·g·L ≈ 1.47 N·m (0.5 kg) / 2.06 N·m (0.7 kg), 관절 기준. 점질량 관성 m·L² = 0.045 kg·m² (0.5 kg).</p>
+
+<h2>5. 결과</h2>
+<table>
+<tr><th style="width:30%">항목</th><th>관찰</th><th class="cmp">비교 메모</th></tr>
+<tr><td>추종</td><td>30° / 60° / 90° 목표를 순서대로 추종. 로그상 t=8 s 최종 각도 90.15°</td><td class="cmp"></td></tr>
+<tr><td>과도 응답</td><td>스텝마다 오버슈트 후 짧은 진동을 거쳐 정착 (그래프 눈대중 약 10~15°, 정량 지표 아님)</td><td class="cmp"></td></tr>
+<tr><td>부하 변화</td><td>Pick/Place 시점에도 추종 유지. 무부하(0.5 kg)와 부하(0.7 kg)를 따로 돌렸을 때도 양상 유사</td><td class="cmp"></td></tr>
+<tr><td>시각화</td><td>Multibody Explorer에서 막대가 목표각대로 움직이는 것 확인</td><td class="cmp"></td></tr>
+</table>
+
+<h2>6. 한계 (비교 시 유의)</h2>
+<ul class="warn">
+  <li><b>모터는 이상적 토크원</b>: PMSM, 인버터, 전류루프, 로터 관성 없음. 감속기에도 관성·효율 없음.</li>
+  <li><b>모든 값은 가정값</b>이며 하드웨어 미정. 쿨롱 마찰 0.001은 0이면 에러가 나서 넣은 최소값.</li>
+  <li><b>백래시는 비활성</b>: 켜면 초기조건 수렴이 실패해 보류.</li>
+  <li><b>PID 게인은 튜닝하지 않은 값</b> (발산 방지용으로 낮춤).</li>
+  <li><b>정량 지표 미산출</b>: Settling time, Overshoot, SSE, RMSE, Control effort는 그래프로만 확인. 비교 시 같은 지표로 재산출 필요.</li>
+  <li><b>질량 변화는 이상화</b>: 점질량의 질량값만 시간에 따라 변경, 형상·관성 텐서는 고정.</li>
+</ul>
+
+<p class="small">작성: 종합설계 5주차 MATLAB 테스트 정리. 모든 수치는 저장된 모델(.slx)의 설정값에서 읽은 것.</p>
+</body>
+</html>

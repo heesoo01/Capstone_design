@@ -1,0 +1,421 @@
+{
+ "checks": [
+  {
+   "group": "a",
+   "name": "내 duty 식 vs 민혁 duty (최대 차)",
+   "value": 0.0,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "MATLAB 5 us vs 1.25 us 최대 차 각도 [rad]",
+   "value": 2.4477976000303325e-09,
+   "limit": 0.0005,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "MATLAB 5 us vs 1.25 us 최대 차 속도 [rad/s]",
+   "value": 7.289397296883493e-08,
+   "limit": 0.01,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "MATLAB 5 us vs 1.25 us 최대 차 샘플 iq [A]",
+   "value": 8.299423803759254e-08,
+   "limit": 0.003,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "MATLAB 5 us vs 1.25 us 최대 차 주기 평균 iq [A]",
+   "value": 4.708060830083127e-07,
+   "limit": 0.003,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "최대 각도 차 [rad]",
+   "value": 6.838696898214813e-07,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "최대 샘플 iq 차 [A]",
+   "value": 1.277954221945432e-05,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "최대 주기 평균 iq 차 [A]",
+   "value": 1.394722271252924e-05,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "최대 관절 토크 차 [N*m]",
+   "value": 1.916931332962557e-05,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "e",
+   "name": "최대 모터 토크 차 [N*m]",
+   "value": 3.833862665822418e-06,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k MATLAB iq vs 정확해 최대 차 [A]",
+   "value": 1.1277694591527165e-06,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k MATLAB id vs 정확해 최대 차 [A]",
+   "value": 3.839396316119518e-09,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k 마지막 10 ms 평균 iq 민혁과 차 [A]",
+   "value": 1.0896764177648066e-06,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k 마지막 주기 iq 리플(p-p) 민혁과 상대차",
+   "value": 5.617879699965423e-07,
+   "limit": 0.05,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k 선간 전압이 -24/0/+24 V 중 하나 (최대 거리 [V])",
+   "value": 0.0,
+   "limit": 1e-06,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k 세 상전압 합 최대 [V]",
+   "value": 7.1990413630374e-11,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k MATLAB iq vs 정확해 최대 차 [A]",
+   "value": 9.059192760396684e-07,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k MATLAB id vs 정확해 최대 차 [A]",
+   "value": 1.3484887384247052e-09,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k 마지막 10 ms 평균 iq 민혁과 차 [A]",
+   "value": 8.739319976580617e-07,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k 마지막 주기 iq 리플(p-p) 민혁과 상대차",
+   "value": 4.5517704276613976e-07,
+   "limit": 0.05,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k 선간 전압이 -24/0/+24 V 중 하나 (최대 거리 [V])",
+   "value": 0.0,
+   "limit": 1e-06,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k 세 상전압 합 최대 [V]",
+   "value": 7.1990413630374e-11,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_avg MATLAB iq vs 정확해 최대 차 [A]",
+   "value": 1.5174554723884626e-08,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_avg MATLAB id vs 정확해 최대 차 [A]",
+   "value": 0.0,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_avg 마지막 10 ms 평균 iq 민혁과 차 [A]",
+   "value": 2.755151662370281e-11,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_avg 평균 모델 iq 리플(p-p) [A]",
+   "value": 9.125535900267323e-07,
+   "limit": 0.0001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_avg 세 상전압 합 최대 [V]",
+   "value": 0.0,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm10k 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]",
+   "value": 2.957314393370325e-10,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "held_pwm20k 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]",
+   "value": 5.746749742741031e-10,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 최대 각도 차 [rad]",
+   "value": 6.614321941744716e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 최대 샘플 iq 차 [A]",
+   "value": 0.0002903565601549609,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 최대 주기 평균 iq 차 [A]",
+   "value": 0.00031069254238705324,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 최대 관절 토크 차 [N*m]",
+   "value": 0.0004355348402323954,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 최대 모터 토크 차 [N*m]",
+   "value": 8.71069680464789e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 2% 정착시간 차 [s]",
+   "value": 0.001000000000000112,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "pwm 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]",
+   "value": 4.540586554316328e-09,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 최대 각도 차 [rad]",
+   "value": 1.3624896412905985e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 최대 샘플 iq 차 [A]",
+   "value": 4.1416389325421576e-05,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 최대 주기 평균 iq 차 [A]",
+   "value": 4.142296208076157e-05,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 최대 관절 토크 차 [N*m]",
+   "value": 6.212458398424658e-05,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 최대 모터 토크 차 [N*m]",
+   "value": 1.2424916797842966e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "avg 100 us 평균 상전압 vs 24*(duty-평균 duty) 최대 차 [V]",
+   "value": 1.397593152319132e-11,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  }
+ ],
+ "metrics": {
+  "def_check_pwm": {
+   "settle_mine": 0.893,
+   "settle_summary": 0.893,
+   "rmse_mine": 0.09037372732973714,
+   "rmse_summary": 0.09037372732973714
+  },
+  "def_check_average": {
+   "settle_mine": 0.8940000000000001,
+   "settle_summary": 0.8940000000000001,
+   "rmse_mine": 0.09039085530578896,
+   "rmse_summary": 0.09039085530578896
+  },
+  "startup_convergence": {
+   "_dt5us": {
+    "angle": 2.4477976000303325e-09,
+    "speed": 7.289397296883493e-08,
+    "iq": 8.299423803759254e-08,
+    "iqmean": 4.708060830083127e-07
+   },
+   "_dt2p5us": {
+    "angle": 2.355654601937651e-09,
+    "speed": 6.650144002140479e-08,
+    "iq": 8.055563704978397e-08,
+    "iqmean": 4.6641941300884504e-07
+   }
+  },
+  "startup_vs_python": {
+   "angle": 6.838696898214813e-07,
+   "iq": 1.277954221945432e-05,
+   "iqmean": 1.394722271252924e-05,
+   "torque": 1.916931332962557e-05,
+   "speed": 1.5926541906408076e-05
+  },
+  "held_pwm10k": {
+   "mean_iq_last10ms": 1.9998428907365127,
+   "iq_pp_last_period": 0.00927879486033012,
+   "py_mean": 1.9998439804129304,
+   "py_pp": 0.009278800073048377
+  },
+  "held_pwm20k": {
+   "mean_iq_last10ms": 1.9998431063596784,
+   "iq_pp_last_period": 0.004639397799379719,
+   "py_mean": 1.999843980291676,
+   "py_pp": 0.00463939991112805
+  },
+  "held_avg": {
+   "mean_iq_last10ms": 1.9998439802788157,
+   "iq_pp_last_period": 9.125535900267323e-07,
+   "py_mean": 1.9998439802512642,
+   "py_pp": 9.125537596688105e-07
+  },
+  "main_pwm": {
+   "settle_ml": 0.8940000000000001,
+   "settle_py": 0.893,
+   "rmse_ml": 0.09039093103618745,
+   "rmse_py": 0.09037372732973714
+  },
+  "main_avg": {
+   "settle_ml": 0.8940000000000001,
+   "settle_py": 0.8940000000000001,
+   "rmse_ml": 0.09039114667103675,
+   "rmse_py": 0.09039085530578896
+  },
+  "main_pwm_vs_avg": {
+   "max_angle": 1.0245402540243198e-06,
+   "rms_cycle_iq": 1.3826954966012639e-06
+  },
+  "main_cycle_pp": {
+   "ml_max": 0.023934873823545,
+   "py_max": 0.023934891013144548
+  }
+ }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>MATLAB vs MuJoCo 1자유도 검증 비교</title>
+<style>
+  @page { size: A4; margin: 11mm 12mm; }
+  body { font-family: "Malgun Gothic", "맑은 고딕", sans-serif; font-size: 9.2pt; color: #1a1a1a; line-height: 1.38; }
+  h1 { font-size: 16pt; margin: 0 0 1.5mm; }
+  h2 { font-size: 11.5pt; margin: 5mm 0 2mm; padding-bottom: 1mm; border-bottom: 1.5px solid #2b5797; color: #2b5797; }
+  .meta { color: #555; font-size: 8.8pt; margin-bottom: 2.5mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1.5mm 0 2mm; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid #b8b8b8; padding: 1mm 2mm; vertical-align: top; }
+  th { background: #eef2f8; text-align: left; }
+  td.v { font-family: Consolas, "Malgun Gothic", monospace; }
+  .box { border: 1.5px solid #2b5797; background: #f3f7fc; padding: 2.5mm 3mm; margin: 1mm 0 2mm; }
+  .box b.big { font-size: 10.5pt; }
+  .same { background: #e4f4e4; text-align: center; font-weight: bold; color: #1d6b1d; white-space: nowrap; }
+  .part { background: #fff4d6; text-align: center; font-weight: bold; color: #8a5a00; white-space: nowrap; }
+  .diff { background: #fde3e3; text-align: center; font-weight: bold; color: #a11d1d; white-space: nowrap; }
+  .note { font-size: 8.6pt; color: #444; }
+  .small { font-size: 8.3pt; color: #666; }
+  ul { margin: 1mm 0 1mm 5mm; padding: 0; }
+  li { margin-bottom: 0.8mm; }
+  .cols { display: flex; gap: 3mm; }
+  .cols > div { flex: 1; }
+</style>
+</head>
+<body>
+
+<h1>MATLAB vs MuJoCo 1자유도 검증 비교</h1>
+<div class="meta">MATLAB: 본인 (Simscape, 5주차) · MuJoCo: 이민혁 (MuJoCo 3.14.0 + 외부 Python PMSM, 2026.10.02 수행) · 출처: 저장된 .slx 설정값 / 합본 PDF (3~7쪽)</div>
+
+<div class="box">
+<b class="big">결론: 목적은 같지만(1관절 위치 추종 + 부하 영향) "같은 조건의 같은 시험"은 아니다.</b><br>
+MATLAB은 <b>Pick-and-Place 시나리오 흉내</b>(다중 목표각 + 이동 중 질량 변화, 중력 포함)를 이상 토크원으로 돌렸고,
+MuJoCo는 <b>전기 모델(PMSM·전류루프·전압 한계)을 붙인 단일 스텝 응답</b>(중력 끔)을 수치 검증까지 했다.
+기어비·중력·제어기·입력이 달라 <b>결과 수치로 시뮬레이터 우열을 비교할 수 없다</b> (이민혁 문서도 같은 결론).
+</div>
+
+<h2>1. 무엇이 같고 무엇이 다른가</h2>
+<table>
+<tr><th style="width:17%">항목</th><th style="width:30%">MATLAB (본인)</th><th style="width:30%">MuJoCo (이민혁)</th><th style="width:7%">판정</th></tr>
+<tr><td>목적</td><td>단일 관절 위치 추종, 부하 영향 확인</td><td>단일 관절 위치 추종, 부하 영향 확인</td><td class="same">같음</td></tr>
+<tr><td>자유도</td><td>1자유도 회전 관절</td><td>1자유도 회전 관절</td><td class="same">같음</td></tr>
+<tr><td>시나리오</td><td>0°→30°→60°→90° 계단 + 이동 중 질량 0.5→0.7→0.5 kg (한 번의 연속 실행)</td><td>단일 스텝(그림 기준 0.3 rad, 큰 명령 2 rad)을 0.2 s에 인가, 2 s 기록. 부하는 실행 간 변경(1 kg / 3 kg)</td><td class="diff">다름</td></tr>
+<tr><td>중력</td><td>있음 (−Z, 회전축 수평이라 중력 토크 작용)</td><td>통합 실험에서는 <b>끔</b> (중력 단독 시험은 B1에서 따로 PASS)</td><td class="diff">다름</td></tr>
+<tr><td>구동(모터) 모델</td><td>이상적 토크원 (전기 모델 없음)</td><td>위치 PD → 전류 PI → 전압 제한 → 외부 SPMSM (dq 전기 동특성 포함). 이상 토크 모델과도 비교</td><td class="diff">다름</td></tr>
+<tr><td>감속기</td><td>50:1, 이상적(관성·효율 없음), 백래시 꺼짐</td><td>5:1, 이상적 기어. (B2에서 기어비 10·효율 0.8·백래시 최소 모델은 별도 확인)</td><td class="diff">다름</td></tr>
+<tr><td>제어기</td><td>연속시간 PID (오차 deg → 모터측 토크)</td><td>이산 위치 PD(1 ms) + 전류 PI(100 µs, anti-windup)</td><td class="diff">다름</td></tr>
+<tr><td>부하 변경 방식</td><td>점질량의 질량값을 시뮬레이션 도중 변경 (이상화, 접촉·파지 아님)</td><td>시뮬레이션 전에 링크 질량을 고정값으로 설정</td><td class="part">부분</td></tr>
+<tr><td>검증 방식</td><td>그래프 관찰 (추종·진동), 정량 지표 미산출</td><td>오차·RMSE·정착, 기준 해와 비교, 적분 간격(100/50/25 µs) 수렴, 에너지 수지 검사</td><td class="diff">다름</td></tr>
+<tr><td>3D 시각화</td><td>Multibody Explorer에서 확인</td><td>문서에 언급 없음</td><td class="part">확인 불가</td></tr>
+</table>
+
+<h2>2. 파라미터 비교</h2>
+<table>
+<tr><th style="width:18%">항목</th><th style="width:29%">MATLAB</th><th style="width:29%">MuJoCo</th><th>비고</th></tr>
+<tr><td>입력 크기</td><td class="v">30° 계단 ×3 (0.5236 rad씩)</td><td class="v">0.3 rad (≈17.2°), 큰 명령 2 rad (≈114.6°)</td><td>MATLAB은 deg, MuJoCo는 rad</td></tr>
+<tr><td>입력 시점 / 길이</td><td class="v">0.5, 2.5, 4.5 s / 8 s</td><td class="v">0.2 s / 2 s</td><td></td></tr>
+<tr><td>링크 질량</td><td class="v">점질량 0.5 kg (부하 0.7 kg), 팔 길이 0.3 m</td><td class="v">1 kg 또는 3 kg</td><td>MuJoCo 링크 길이 문서에 없음</td></tr>
+<tr><td>관절 관성</td><td class="v">m·L² = 0.045 kg·m² (0.5 kg)</td><td class="v">0.05354167 kg·m² (B1)</td><td>산출 근거가 달라 직접 비교 주의</td></tr>
+<tr><td>감속비</td><td class="v">50 (출력 반대방향)</td><td class="v">5</td><td>10배 차이</td></tr>
+<tr><td>감쇠 / 마찰</td><td class="v">점성 0.01, 쿨롱 0.001 N·m</td><td class="v">감쇠 0.1 N·m·s/rad</td><td>MATLAB 점성 단위는 기본값(추정)</td></tr>
+<tr><td>모터(전기)</td><td class="v">없음 (이상적 토크원)</td><td class="v">R 0.5 Ω, Ld=Lq 5 mH, 자속 0.05 Wb, 극쌍 4, 회전자 관성 1e-4 kg·m²</td><td>모두 가정값</td></tr>
+<tr><td>제어 이득</td><td class="v">PID 0.05 / 0.01 / 0.005</td><td class="v">PD 4 / 1, 전류 PI 1.5 / 150</td><td>제어기 구조·단위 다름</td></tr>
+<tr><td>제한</td><td class="v">없음</td><td class="v">전류 ±2 A, 전압 Vdc/√3</td><td>MuJoCo는 포화 시험 있음</td></tr>
+<tr><td>중력</td><td class="v">[0 0 −9.80665]</td><td class="v">통합: 끔</td><td></td></tr>
+</table>
+
+<h2>3. 한쪽에만 있는 검증</h2>
+<div class="cols">
+<div>
+<b>MATLAB에만 있음</b>
+<ul>
+  <li>다중 목표각을 한 번에 연속 추종 (0→30→60→90°)</li>
+  <li>이동 <b>도중</b> 질량 변화 (Pick/Place 모사)</li>
+  <li>중력 토크가 걸린 상태의 제어</li>
+  <li>Multibody 3D 애니메이션</li>
+</ul>
+</div>
+<div>
+<b>MuJoCo에만 있음</b>
+<ul>
+  <li>PMSM 전기 동특성 + 전류 PI + 전압 한계 (이상 토크 모델과 3종 비교)</li>
+  <li>전압 포화 시험: 2 V 제한 시 PMSM 응답만 느려짐 (2 rad 명령 시 2 s에 약 1.9 rad), 24 V에서는 세 모델이 거의 일치</li>
+  <li>정량 검증: 기준 해 비교, 적분 간격 수렴, 에너지 수지 (잔차 약 1e-5 ~ 4e-4 J, 그림 눈대중)</li>
+  <li>PWM 평균 전압, 기어 환산, 1차 지연 등 기능 단위 시험 (A1~C3)</li>
+</ul>
+</div>
+</div>
+<p class="note">그림 읽기: baseline(0.3 rad)은 세 모델이 거의 겹치며 오버슈트 없이 수렴, heavier_link는 약 0.316 rad까지 소폭 오버슈트 (그림 눈대중).</p>
+
+<h2>4. 그래서 어떻게 비교할 수 있나</h2>
+<ul>
+  <li><b>지금 비교 가능</b>: "단일 관절 위치 추종이 두 시뮬레이터에서 구현·안정 동작한다"는 수준의 정성 결과.</li>
+  <li><b>지금 비교 불가</b>: 응답 시간·오버슈트 같은 수치 우열 (기어비 50 vs 5, 중력 유무, 제어기, 입력 크기가 모두 다름).</li>
+  <li><b>같은 조건으로 다시 맞추려면 (제안)</b>
+    <ul>
+      <li>입력: 같은 스텝 (예: 30° = 0.5236 rad, 0.2 s 인가)와 같은 기록 시간</li>
+      <li>기계: 같은 링크 질량·길이·관성, 같은 감속비, 같은 중력 설정 (끄거나 켜거나 한쪽으로 통일)</li>
+      <li>구동: 이상 토크원끼리 먼저 비교 → 그 다음 PMSM 포함 비교 (MATLAB S3 미구현)</li>
+      <li>지표: 오버슈트, 정착시간, 정상상태 오차, RMSE, 제어 노력을 같은 식으로 산출</li>
+    </ul>
+  </li>
+</ul>
+
+<p class="small">작성 기준: MATLAB 값은 s1_mechanical.slx 설정값, MuJoCo 값은 합본 PDF 3~7쪽 기재 내용. 그림 해석은 눈대중이며 MuJoCo 쪽 원본 수치 데이터는 확인하지 못함.</p>
+</body>
+</html>

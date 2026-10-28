@@ -1,0 +1,6 @@
+MATLAB 26.1.0.3251617 (R2026a) Update 2 | Simulink solver=ode23t RelTol=1e-6 AbsTol=1e-9 | Ts=0.001 s | log_dt=0.001 s
+run 1: MaxStep=0.0001 | tau(0.2)=1.200000 | qmax=0.299913 | overshoot=0.0000% | qdmax=0.849136 | ts=0.904 | RMSE_ref=0.089949 | RMSE_theory=0.000151
+run 2: MaxStep=5e-05 | tau(0.2)=1.200000 | qmax=0.299913 | overshoot=0.0000% | qdmax=0.849137 | ts=0.904 | RMSE_ref=0.089948 | RMSE_theory=0.000151
+run 3: MaxStep=2.5e-05 | tau(0.2)=1.200000 | qmax=0.299913 | overshoot=0.0000% | qdmax=0.849137 | ts=0.904 | RMSE_ref=0.089948 | RMSE_theory=0.000151
+convergence: MaxStep 5e-05 vs 0.0001 max|dq|=1.202e-06 rad
+convergence: MaxStep 2.5e-05 vs 0.0001 max|dq|=1.481e-06 rad

@@ -1,0 +1,279 @@
+{
+  "stage": "3-2",
+  "scope": "Numerical CSV agreement, not hardware validation. Nominal model metadata is checked from CSV; solver settings, convergence and implementation must be verified separately.",
+  "time_alignment": "Fixed grids without interpolation or shifts; position 1 ms, electrical 100 us.",
+  "rmse_window": "Tracking and between-environment position RMSE use .2<=t<=2 s, 1801 samples.",
+  "limits": {
+    "max_angle_rad": 0.001,
+    "max_iq_A": 0.01,
+    "max_joint_torque_Nm": 0.015,
+    "settling_difference_s": 0.01
+  },
+  "cases": {
+    "baseline_24V": {
+      "input_files": {
+        "mujoco": {
+          "position": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\baseline_24V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\baseline_24V_electrical_dt6p25us.csv"
+        },
+        "matlab": {
+          "position": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\baseline_24V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\baseline_24V_electrical_dt6p25us.csv"
+        }
+      },
+      "csv_invariant_checks": {
+        "mujoco": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        },
+        "matlab": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        }
+      },
+      "own_tracking_metrics": {
+        "mujoco": {
+          "tracking_rmse_rad": 0.09039078833972337,
+          "settling_2percent_s_after_step": 0.8940000000000001,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 0.8589987976358605,
+          "final_error_rad": 7.787479391491159e-05,
+          "voltage_saturated_duration_s": 0.0,
+          "iq_tracking_rmse_A": 0.024773349232718237
+        },
+        "matlab": {
+          "tracking_rmse_rad": 0.09039116861515131,
+          "settling_2percent_s_after_step": 0.8940000000000001,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 0.858993269836173,
+          "final_error_rad": 7.786365583900556e-05,
+          "voltage_saturated_duration_s": 0.0,
+          "iq_tracking_rmse_A": 0.024773166474411044
+        }
+      },
+      "between_environment_metrics": {
+        "max_angle_difference_rad": 1.7187834058657314e-06,
+        "time_at_max_angle_difference_s": 0.334,
+        "between_environment_position_rmse_rad": 5.580875146836315e-07,
+        "max_speed_difference_rad_s": 5.321055342570602e-05,
+        "max_iq_difference_A": 5.18308031792758e-05,
+        "max_id_difference_A": 1.49512142526336e-06,
+        "max_joint_input_torque_difference_Nm": 7.774620477274397e-05,
+        "max_motor_torque_difference_Nm": 1.554924095353849e-05,
+        "max_motor_speed_difference_rad_s": 0.0002661349465357121,
+        "max_voltage_vector_difference_V": 8.825173598977057e-05,
+        "voltage_flag_mismatch_count": 0,
+        "voltage_saturated_duration_difference_s": 0.0,
+        "settling_status": "both_settled",
+        "settling_difference_s": 0.0
+      },
+      "tests": {
+        "csv_internal_invariants": true,
+        "angle_limit_0p001rad": true,
+        "iq_limit_0p01A": true,
+        "joint_torque_limit_0p015Nm": true,
+        "settling_agreement": true
+      },
+      "numerical_csv_pass": true
+    },
+    "large_24V": {
+      "input_files": {
+        "mujoco": {
+          "position": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\large_24V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\large_24V_electrical_dt6p25us.csv"
+        },
+        "matlab": {
+          "position": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\large_24V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\large_24V_electrical_dt6p25us.csv"
+        }
+      },
+      "csv_invariant_checks": {
+        "mujoco": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        },
+        "matlab": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        }
+      },
+      "own_tracking_metrics": {
+        "mujoco": {
+          "tracking_rmse_rad": 0.6524460936713196,
+          "settling_2percent_s_after_step": 0.9260000000000002,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 5.515914224725424,
+          "final_error_rad": 0.0006054336291563267,
+          "voltage_saturated_duration_s": 0.0,
+          "iq_tracking_rmse_A": 0.06409620970396215
+        },
+        "matlab": {
+          "tracking_rmse_rad": 0.6524459208727508,
+          "settling_2percent_s_after_step": 0.9259999999999999,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 5.51590038917225,
+          "final_error_rad": 0.0006053434889099485,
+          "voltage_saturated_duration_s": 0.0,
+          "iq_tracking_rmse_A": 0.06409804807058572
+        }
+      },
+      "between_environment_metrics": {
+        "max_angle_difference_rad": 5.404160413613468e-06,
+        "time_at_max_angle_difference_s": 0.728,
+        "between_environment_position_rmse_rad": 2.6327043004949723e-06,
+        "max_speed_difference_rad_s": 0.0001509493247520699,
+        "max_iq_difference_A": 7.060655730750653e-05,
+        "max_id_difference_A": 1.0605650646394765e-05,
+        "max_joint_input_torque_difference_Nm": 0.0001059098359612598,
+        "max_motor_torque_difference_Nm": 2.1181967192362983e-05,
+        "max_motor_speed_difference_rad_s": 0.0007547526799371873,
+        "max_voltage_vector_difference_V": 0.00031348418592035387,
+        "voltage_flag_mismatch_count": 0,
+        "voltage_saturated_duration_difference_s": 0.0,
+        "settling_status": "both_settled",
+        "settling_difference_s": 2.220446049250313e-16
+      },
+      "tests": {
+        "csv_internal_invariants": true,
+        "angle_limit_0p001rad": true,
+        "iq_limit_0p01A": true,
+        "joint_torque_limit_0p015Nm": true,
+        "settling_agreement": true
+      },
+      "numerical_csv_pass": true
+    },
+    "large_2V": {
+      "input_files": {
+        "mujoco": {
+          "position": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\large_2V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\이민혁\\stage_3_2\\large_2V_electrical_dt6p25us.csv"
+        },
+        "matlab": {
+          "position": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\large_2V_position_dt6p25us.csv",
+          "electrical": "D:\\Capstone_design\\week5\\matlab_results\\stage3_2\\large_2V_electrical_dt6p25us.csv"
+        }
+      },
+      "csv_invariant_checks": {
+        "mujoco": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        },
+        "matlab": {
+          "gear": true,
+          "declared_total_inertia": true,
+          "motor_speed_mapping": true,
+          "torque_mapping": true,
+          "torque_equation": true,
+          "voltage_limit": true,
+          "voltage_bound": true,
+          "iq_reference_bound": true,
+          "zero_id_reference": true,
+          "initial_request": true,
+          "initial_current_reference": true,
+          "voltage_limited_boolean": true,
+          "current_reference_limited_boolean": true
+        }
+      },
+      "own_tracking_metrics": {
+        "mujoco": {
+          "tracking_rmse_rad": 1.1700635566350075,
+          "settling_2percent_s_after_step": null,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 1.171030827690974,
+          "final_error_rad": 0.09449677756506802,
+          "voltage_saturated_duration_s": 1.5281,
+          "iq_tracking_rmse_A": 1.4873521789053832
+        },
+        "matlab": {
+          "tracking_rmse_rad": 1.1700691044371472,
+          "settling_2percent_s_after_step": null,
+          "overshoot_percent": 0.0,
+          "peak_abs_speed_rad_s": 1.17092395446632,
+          "final_error_rad": 0.09449842644253992,
+          "voltage_saturated_duration_s": 1.5281,
+          "iq_tracking_rmse_A": 1.4873536974071722
+        }
+      },
+      "between_environment_metrics": {
+        "max_angle_difference_rad": 7.1620149730139415e-06,
+        "time_at_max_angle_difference_s": 0.28300000000000003,
+        "between_environment_position_rmse_rad": 6.348367387127018e-06,
+        "max_speed_difference_rad_s": 0.00014384159442371036,
+        "max_iq_difference_A": 0.00029978293031684977,
+        "max_id_difference_A": 1.7122503572011838e-05,
+        "max_joint_input_torque_difference_Nm": 0.00044967439547471955,
+        "max_motor_torque_difference_Nm": 8.993487909503273e-05,
+        "max_motor_speed_difference_rad_s": 0.0007193765312374367,
+        "max_voltage_vector_difference_V": 1.2535142646271225e-05,
+        "voltage_flag_mismatch_count": 0,
+        "voltage_saturated_duration_difference_s": 0.0,
+        "settling_status": "both_unsettled_NA",
+        "settling_difference_s": null
+      },
+      "tests": {
+        "csv_internal_invariants": true,
+        "angle_limit_0p001rad": true,
+        "iq_limit_0p01A": true,
+        "joint_torque_limit_0p015Nm": true,
+        "settling_agreement": true
+      },
+      "numerical_csv_pass": true
+    }
+  },
+  "overall_numerical_csv_pass": true
+}

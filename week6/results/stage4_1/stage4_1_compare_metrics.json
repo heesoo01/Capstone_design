@@ -1,0 +1,678 @@
+{
+ "checks": [
+  {
+   "group": "a",
+   "name": "baseline_step_baseline 최대 각도 차 [rad]",
+   "value": 6.850072102035365e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step_baseline 최대 샘플 iq 차 [A]",
+   "value": 0.0002069578182948284,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step_baseline 최대 관절 토크 차 [N*m]",
+   "value": 0.00031043672744490713,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step_baseline 최대 모터 토크 차 [N*m]",
+   "value": 6.208734548798778e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step_baseline 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "small_step_baseline 최대 각도 차 [rad]",
+   "value": 2.2747109830380946e-07,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "small_step_baseline 최대 샘플 iq 차 [A]",
+   "value": 6.933019231013249e-06,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "small_step_baseline 최대 관절 토크 차 [N*m]",
+   "value": 1.0399528846530282e-05,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "small_step_baseline 최대 모터 토크 차 [N*m]",
+   "value": 2.079905769304495e-06,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "small_step_baseline 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal_baseline 최대 각도 차 [rad]",
+   "value": 5.309561866007062e-07,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal_baseline 최대 샘플 iq 차 [A]",
+   "value": 1.756626820585347e-06,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal_baseline 최대 관절 토크 차 [N*m]",
+   "value": 2.6349402309187864e-06,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal_baseline 최대 모터 토크 차 [N*m]",
+   "value": 5.269880461742163e-07,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "hold_restart_baseline 최대 각도 차 [rad]",
+   "value": 5.4753122415221456e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "hold_restart_baseline 최대 샘플 iq 차 [A]",
+   "value": 0.00016565641947863252,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "hold_restart_baseline 최대 관절 토크 차 [N*m]",
+   "value": 0.0002484846292176712,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "hold_restart_baseline 최대 모터 토크 차 [N*m]",
+   "value": 4.969692584391727e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p001 최대 각도 차 [rad]",
+   "value": 6.573086526728833e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p001 최대 샘플 iq 차 [A]",
+   "value": 0.000531487375698074,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p001 최대 관절 토크 차 [N*m]",
+   "value": 0.0007972310635471075,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p001 최대 모터 토크 차 [N*m]",
+   "value": 0.00015944621270941144,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p01 최대 각도 차 [rad]",
+   "value": 0.00032503560355473526,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p01 최대 샘플 iq 차 [A]",
+   "value": 0.0013939649569660248,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.002090947435448992,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.0004181894870897984,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p1 최대 각도 차 [rad]",
+   "value": 0.004309599935769737,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p1 최대 샘플 iq 차 [A]",
+   "value": 0.014795590671577225,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p1 최대 관절 토크 차 [N*m]",
+   "value": 0.02219338600736589,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "baseline_step dry vb0p1 최대 모터 토크 차 [N*m]",
+   "value": 0.004438677201473168,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p001 최대 각도 차 [rad]",
+   "value": 0.001564285780492714,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p001 최대 샘플 iq 차 [A]",
+   "value": 0.004498714126296072,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p001 최대 관절 토크 차 [N*m]",
+   "value": 0.006748071189444205,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p001 최대 모터 토크 차 [N*m]",
+   "value": 0.0013496142378888309,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p01 최대 각도 차 [rad]",
+   "value": 0.00048392199133302717,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p01 최대 샘플 iq 차 [A]",
+   "value": 0.0013482914924312292,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.0020224372386467987,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.00040448744772936945,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p1 최대 각도 차 [rad]",
+   "value": 0.006649360764803447,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p1 최대 샘플 iq 차 [A]",
+   "value": 0.01798678711341591,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p1 최대 관절 토크 차 [N*m]",
+   "value": 0.02698018067012386,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "small_step dry vb0p1 최대 모터 토크 차 [N*m]",
+   "value": 0.005396036134024772,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p001 최대 각도 차 [rad]",
+   "value": 7.343883159967313e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p001 최대 샘플 iq 차 [A]",
+   "value": 0.0006630139000752405,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p001 최대 관절 토크 차 [N*m]",
+   "value": 0.0009945208501129094,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p001 최대 모터 토크 차 [N*m]",
+   "value": 0.00019890417002258257,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p01 최대 각도 차 [rad]",
+   "value": 7.341297132961583e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p01 최대 샘플 iq 차 [A]",
+   "value": 0.0007686935136416786,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.0011530402704624729,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.0002306080540924755,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p1 최대 각도 차 [rad]",
+   "value": 0.0009207174747935221,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p1 최대 샘플 iq 차 [A]",
+   "value": 0.006974984570112641,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p1 최대 관절 토크 차 [N*m]",
+   "value": 0.010462476855168865,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal dry vb0p1 최대 모터 토크 차 [N*m]",
+   "value": 0.002092495371033733,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p001 최대 각도 차 [rad]",
+   "value": 0.0006985130665377315,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p001 최대 샘플 iq 차 [A]",
+   "value": 0.0024155892435308024,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p001 최대 관절 토크 차 [N*m]",
+   "value": 0.00362338386529637,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p001 최대 모터 토크 차 [N*m]",
+   "value": 0.0007246767730590686,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p01 최대 각도 차 [rad]",
+   "value": 0.0008504963411270355,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p01 최대 샘플 iq 차 [A]",
+   "value": 0.002496127488837499,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.003744191233256297,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.0007488382466512497,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p1 최대 각도 차 [rad]",
+   "value": 0.00752922101574291,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p1 최대 샘플 iq 차 [A]",
+   "value": 0.021326383937073805,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p1 최대 관절 토크 차 [N*m]",
+   "value": 0.03198957590561076,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "b",
+   "name": "hold_restart dry vb0p1 최대 모터 토크 차 [N*m]",
+   "value": 0.006397915181122151,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "MATLAB 5 us vs 2.5 us 최대 각도 차 [rad]",
+   "value": 6.932748201904371e-09,
+   "limit": 0.0002,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "MATLAB 5 us vs 2.5 us 최대 속도 차 [rad/s]",
+   "value": 2.696640119537186e-08,
+   "limit": 0.003,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "MATLAB 5 us vs 2.5 us 최대 iq 차 [A]",
+   "value": 1.4224336097878876e-08,
+   "limit": 0.005,
+   "source": "신규",
+   "ok": true
+  }
+ ],
+ "metrics": {
+  "def_check_baseline_step_baseline": {
+   "reproduced": true
+  },
+  "def_check_baseline_step_dry_friction": {
+   "reproduced": true
+  },
+  "def_check_small_step_baseline": {
+   "reproduced": true
+  },
+  "def_check_small_step_dry_friction": {
+   "reproduced": true
+  },
+  "def_check_slow_reversal_baseline": {
+   "reproduced": true
+  },
+  "def_check_slow_reversal_dry_friction": {
+   "reproduced": true
+  },
+  "def_check_hold_restart_baseline": {
+   "reproduced": true
+  },
+  "def_check_hold_restart_dry_friction": {
+   "reproduced": true
+  },
+  "b_baseline_step_vb0p001": {
+   "max_angle_diff_vs_py": 6.573086526728833e-05,
+   "rmse_ml": 0.09361697586070422,
+   "rmse_py": 0.09361636555562032,
+   "final_err_ml": 0.012574142268805988,
+   "final_err_py": 0.0125084114035387
+  },
+  "b_baseline_step_vb0p01": {
+   "max_angle_diff_vs_py": 0.00032503560355473526,
+   "rmse_ml": 0.0936086654550466,
+   "rmse_py": 0.09361636555562032,
+   "final_err_ml": 0.012183375799983964,
+   "final_err_py": 0.0125084114035387
+  },
+  "b_baseline_step_vb0p1": {
+   "max_angle_diff_vs_py": 0.004309599935769737,
+   "rmse_ml": 0.09349249557639265,
+   "rmse_py": 0.09361636555562032,
+   "final_err_ml": 0.008198811467768963,
+   "final_err_py": 0.0125084114035387
+  },
+  "sens_baseline_step": {
+   "max_angle_spread": 0.004375330801037025
+  },
+  "b_small_step_vb0p001": {
+   "max_angle_diff_vs_py": 0.001564285780492714,
+   "rmse_ml": 0.009850949787679227,
+   "rmse_py": 0.009058493179333117,
+   "final_err_ml": 0.00970355272554068,
+   "final_err_py": 0.008139266945047968
+  },
+  "b_small_step_vb0p01": {
+   "max_angle_diff_vs_py": 0.00048392199133302717,
+   "rmse_ml": 0.008776732292869132,
+   "rmse_py": 0.009058493179333117,
+   "final_err_ml": 0.00765534495371494,
+   "final_err_py": 0.008139266945047968
+  },
+  "b_small_step_vb0p1": {
+   "max_angle_diff_vs_py": 0.006649360764803447,
+   "rmse_ml": 0.005019337770651477,
+   "rmse_py": 0.009058493179333117,
+   "final_err_ml": 0.0014899061802445199,
+   "final_err_py": 0.008139266945047968
+  },
+  "sens_small_step": {
+   "max_angle_spread": 0.00821364654529616
+  },
+  "b_slow_reversal_vb0p001": {
+   "max_angle_diff_vs_py": 7.343883159967313e-05,
+   "rmse_ml": 0.02924328930130109,
+   "rmse_py": 0.02923882368103013,
+   "final_err_ml": 0.04098935753087132,
+   "final_err_py": 0.04098677787100189
+  },
+  "b_slow_reversal_vb0p01": {
+   "max_angle_diff_vs_py": 7.341297132961583e-05,
+   "rmse_ml": 0.029221322762964148,
+   "rmse_py": 0.02923882368103013,
+   "final_err_ml": 0.04096657490610923,
+   "final_err_py": 0.04098677787100189
+  },
+  "b_slow_reversal_vb0p1": {
+   "max_angle_diff_vs_py": 0.0009207174747935221,
+   "rmse_ml": 0.029073790638802662,
+   "rmse_py": 0.02923882368103013,
+   "final_err_ml": 0.04080745063845642,
+   "final_err_py": 0.04098677787100189
+  },
+  "sens_slow_reversal": {
+   "max_angle_spread": 0.0009830015441302936
+  },
+  "b_hold_restart_vb0p001": {
+   "max_angle_diff_vs_py": 0.0006985130665377315,
+   "rmse_ml": 0.04995734846089101,
+   "rmse_py": 0.05004173426531059,
+   "final_err_ml": 0.012386718087391002,
+   "final_err_py": 0.011913493224143493
+  },
+  "b_hold_restart_vb0p01": {
+   "max_angle_diff_vs_py": 0.0008504963411270355,
+   "rmse_ml": 0.050114637914746275,
+   "rmse_py": 0.05004173426531059,
+   "final_err_ml": 0.011199700729477999,
+   "final_err_py": 0.011913493224143493
+  },
+  "b_hold_restart_vb0p1": {
+   "max_angle_diff_vs_py": 0.00752922101574291,
+   "rmse_ml": 0.050700076204829546,
+   "rmse_py": 0.05004173426531059,
+   "final_err_ml": 0.005191725219577989,
+   "final_err_py": 0.011913493224143493
+  },
+  "sens_hold_restart": {
+   "max_angle_spread": 0.008222504030271
+  }
+ }
+}

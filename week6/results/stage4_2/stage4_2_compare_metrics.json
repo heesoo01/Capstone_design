@@ -1,0 +1,1048 @@
+{
+ "checks": [
+  {
+   "group": "a",
+   "name": "baseline_step rigid 최대 각도 차 [rad]",
+   "value": 6.848214524832197e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step rigid 최대 샘플 iq 차 [A]",
+   "value": 0.00020695901422584928,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step rigid 최대 관절 토크 차 [N*m]",
+   "value": 0.00031043852133483263,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step rigid 최대 모터 토크 차 [N*m]",
+   "value": 6.208770426799348e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "baseline_step rigid 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "reversal_steps rigid 최대 각도 차 [rad]",
+   "value": 5.600495966047447e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "reversal_steps rigid 최대 샘플 iq 차 [A]",
+   "value": 0.00016577162099107312,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "reversal_steps rigid 최대 관절 토크 차 [N*m]",
+   "value": 0.0002486574314861656,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "reversal_steps rigid 최대 모터 토크 차 [N*m]",
+   "value": 4.973148629763835e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal rigid 최대 각도 차 [rad]",
+   "value": 5.309282761992856e-07,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal rigid 최대 샘플 iq 차 [A]",
+   "value": 1.757107294005078e-06,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal rigid 최대 관절 토크 차 [N*m]",
+   "value": 2.63566094101976e-06,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "a",
+   "name": "slow_reversal rigid 최대 모터 토크 차 [N*m]",
+   "value": 5.271321882041255e-07,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]",
+   "value": 6.83802204999584e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.00020843877958165447,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.0003126581693755348,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 6.253163387409666e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "baseline_step near_zero_gap K1e6 Dcrit 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "reversal_steps near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]",
+   "value": 5.657283033547178e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "reversal_steps near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.00017230921004962596,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "reversal_steps near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.00025846381507499405,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "reversal_steps near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 5.169276301500436e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]",
+   "value": 5.286360525748324e-07,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]",
+   "value": 6.734519659997427e-06,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 1.0101779489997713e-05,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "slow_reversal near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 2.0203558979995317e-06,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_Dcrit 최대 각도 차 [rad]",
+   "value": 4.059320536751532e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.01635198977634611,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.02452798466451922,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.004905596932903822,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_Dcrit 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_D0p01 최대 각도 차 [rad]",
+   "value": 0.0009435441927311272,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.10662547123411578,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.15993820685117316,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.03198764137023463,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e5_D0p01 2% 정착시간 차 [s]",
+   "value": 0.014000000000000012,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_Dcrit 최대 각도 차 [rad]",
+   "value": 4.4292368763006326e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.022438687750253594,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.03365803162538428,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.006731606325075856,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_Dcrit 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_D0p01 최대 각도 차 [rad]",
+   "value": 0.0012626346279122624,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.10551741117785385,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.15827611676678127,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.03165522335335615,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e6_D0p01 2% 정착시간 차 [s]",
+   "value": 0.03499999999999992,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_Dcrit 최대 각도 차 [rad]",
+   "value": 4.535300156442232e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.031280000051576606,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.04692000007736419,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.009384000015472849,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_Dcrit 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_D0p01 최대 각도 차 [rad]",
+   "value": 0.0008611980224216276,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.1300262941192318,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.1950394411788487,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.039007888235769644,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "baseline_step backlash_K1e7_D0p01 2% 정착시간 차 [s]",
+   "value": 0.0020000000000000018,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_Dcrit 최대 각도 차 [rad]",
+   "value": 2.9335602658402433e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.013944541049537462,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.020916811574306693,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.004183362314861244,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_D0p01 최대 각도 차 [rad]",
+   "value": 0.0010933493670372222,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.13474232301994704,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.2021134845299224,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.04042269690598349,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_Dcrit 최대 각도 차 [rad]",
+   "value": 3.233196682995983e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.02194761411625068,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.032921421174374965,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.006584284234874602,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_D0p01 최대 각도 차 [rad]",
+   "value": 0.001482846496841752,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.13312969083163861,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.1996945362474607,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.03993890724949117,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_Dcrit 최대 각도 차 [rad]",
+   "value": 3.324976227541379e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.027874305782338682,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.04181145867350805,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.008362291734701599,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_D0p01 최대 각도 차 [rad]",
+   "value": 0.0012493673670790724,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.13692703161428266,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.20539054742142449,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "reversal_steps backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.04107810948428489,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_Dcrit 최대 각도 차 [rad]",
+   "value": 9.506211867081615e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.008905522686462667,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.013358284029694,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.0026716568059388037,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_D0p01 최대 각도 차 [rad]",
+   "value": 0.000774905192766559,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.11176229171603687,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.16764343757405528,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.03352868751481106,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_Dcrit 최대 각도 차 [rad]",
+   "value": 0.00010190723690954584,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.008734328857982818,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.013101493286974231,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.0026202986573948435,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_D0p01 최대 각도 차 [rad]",
+   "value": 0.0016382475368011545,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.11134843716593243,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.16702265574889866,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.03340453114977983,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_Dcrit 최대 각도 차 [rad]",
+   "value": 9.898491657264752e-05,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]",
+   "value": 0.008748560873482688,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]",
+   "value": 0.01312284131022404,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]",
+   "value": 0.0026245682620448037,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_D0p01 최대 각도 차 [rad]",
+   "value": 0.0011145328210959704,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_D0p01 최대 샘플 iq 차 [A]",
+   "value": 0.13325296829746666,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]",
+   "value": 0.19987945244620048,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "c",
+   "name": "slow_reversal backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]",
+   "value": 0.039975890489239996,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": false
+  },
+  {
+   "group": "d",
+   "name": "MATLAB 5 us vs 2.5 us 최대 각도 차 [rad]",
+   "value": 1.1854930380417183e-07,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "MATLAB 5 us vs 2.5 us 각도 차 RMS [rad]",
+   "value": 1.9175586044389056e-08,
+   "limit": 0.0002,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "MATLAB 5 us vs 2.5 us 최대 부하 속도 차 [rad/s]",
+   "value": 0.00026121746004392765,
+   "limit": 0.05,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "MATLAB 5 us vs 2.5 us 최대 iq 차 [A]",
+   "value": 0.0001609369602129998,
+   "limit": 0.02,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "MATLAB 5 us vs 2.5 us 부하 전달 토크 차 RMS [N*m]",
+   "value": 0.0030975673765340325,
+   "limit": 0.1,
+   "source": "신규",
+   "ok": true
+  }
+ ],
+ "metrics": {
+  "def_check_baseline_step_rigid_reference": {
+   "reproduced": true
+  },
+  "def_check_baseline_step_near_zero_gap": {
+   "reproduced": true
+  },
+  "def_check_baseline_step_backlash": {
+   "reproduced": true
+  },
+  "def_check_reversal_steps_rigid_reference": {
+   "reproduced": true
+  },
+  "def_check_reversal_steps_near_zero_gap": {
+   "reproduced": true
+  },
+  "def_check_reversal_steps_backlash": {
+   "reproduced": true
+  },
+  "def_check_slow_reversal_rigid_reference": {
+   "reproduced": true
+  },
+  "def_check_slow_reversal_near_zero_gap": {
+   "reproduced": true
+  },
+  "def_check_slow_reversal_backlash": {
+   "reproduced": true
+  },
+  "transmitted_torque_sign": {
+   "rms_plus": 0.20233498328233246,
+   "rms_minus": 0.3351252197630825,
+   "chosen": 1.0
+  },
+  "baseline_step_near_zero_gap_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 6.83802204999584e-06,
+   "inside_gap_ml": 0.2028,
+   "inside_gap_py": 0.2023999999999818,
+   "penetration_ml": 1.01553111054399e-06
+  },
+  "reversal_steps_near_zero_gap_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 5.657283033547178e-06,
+   "inside_gap_ml": 0.2097,
+   "inside_gap_py": 0.20792499999998118,
+   "penetration_ml": 8.129098773085801e-07
+  },
+  "slow_reversal_near_zero_gap_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 5.286360525748324e-07,
+   "inside_gap_ml": 0.23520000000000002,
+   "inside_gap_py": 0.2249999999999793,
+   "penetration_ml": 4.843637140044006e-08
+  },
+  "baseline_step_backlash_K1e5_Dcrit": {
+   "max_angle_diff_vs_py": 4.059320536751532e-05,
+   "inside_gap_ml": 0.2695,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 0.00015092670704834263
+  },
+  "baseline_step_backlash_K1e5_D0p01": {
+   "max_angle_diff_vs_py": 0.0009435441927311272,
+   "inside_gap_ml": 1.8951,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 0.0004093949076596215
+  },
+  "baseline_step_backlash_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 4.4292368763006326e-05,
+   "inside_gap_ml": 0.2718,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 4.420108989691175e-05
+  },
+  "baseline_step_backlash_K1e6_D0p01": {
+   "max_angle_diff_vs_py": 0.0012626346279122624,
+   "inside_gap_ml": 1.9681000000000002,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 0.00012702274044705184
+  },
+  "baseline_step_backlash_K1e7_Dcrit": {
+   "max_angle_diff_vs_py": 4.535300156442232e-05,
+   "inside_gap_ml": 0.2727,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 1.1961168213323048e-06
+  },
+  "baseline_step_backlash_K1e7_D0p01": {
+   "max_angle_diff_vs_py": 0.0008611980224216276,
+   "inside_gap_ml": 1.9898,
+   "inside_gap_py": 0.26569999999997485,
+   "penetration_ml": 3.6639417524683e-05
+  },
+  "sens_baseline_step": {
+   "max_angle_spread": 0.00167477118998699,
+   "n": 6
+  },
+  "reversal_steps_backlash_K1e5_Dcrit": {
+   "max_angle_diff_vs_py": 2.9335602658402433e-05,
+   "inside_gap_ml": 0.431,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 9.810470261983201e-05
+  },
+  "reversal_steps_backlash_K1e5_D0p01": {
+   "max_angle_diff_vs_py": 0.0010933493670372222,
+   "inside_gap_ml": 3.9573,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 0.0005908291981931418
+  },
+  "reversal_steps_backlash_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 3.233196682995983e-05,
+   "inside_gap_ml": 0.43510000000000004,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 2.5630891553732327e-05
+  },
+  "reversal_steps_backlash_K1e6_D0p01": {
+   "max_angle_diff_vs_py": 0.001482846496841752,
+   "inside_gap_ml": 4.1253,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 0.00016358175296690182
+  },
+  "reversal_steps_backlash_K1e7_Dcrit": {
+   "max_angle_diff_vs_py": 3.324976227541379e-05,
+   "inside_gap_ml": 0.43760000000000004,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 1.2735579806716357e-06
+  },
+  "reversal_steps_backlash_K1e7_D0p01": {
+   "max_angle_diff_vs_py": 0.0012493673670790724,
+   "inside_gap_ml": 4.1765,
+   "inside_gap_py": 0.4240749999999574,
+   "penetration_ml": 3.8054673572882405e-05
+  },
+  "sens_reversal_steps": {
+   "max_angle_spread": 0.0016448713138390025,
+   "n": 6
+  },
+  "slow_reversal_backlash_K1e5_Dcrit": {
+   "max_angle_diff_vs_py": 9.506211867081615e-05,
+   "inside_gap_ml": 0.9670000000000001,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 2.3166793688272902e-05
+  },
+  "slow_reversal_backlash_K1e5_D0p01": {
+   "max_angle_diff_vs_py": 0.000774905192766559,
+   "inside_gap_ml": 3.9644000000000004,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 0.0003887091484216631
+  },
+  "slow_reversal_backlash_K1e6_Dcrit": {
+   "max_angle_diff_vs_py": 0.00010190723690954584,
+   "inside_gap_ml": 0.9720000000000001,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 6.627019877912185e-06
+  },
+  "slow_reversal_backlash_K1e6_D0p01": {
+   "max_angle_diff_vs_py": 0.0016382475368011545,
+   "inside_gap_ml": 4.127400000000001,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 0.00011713858556250227
+  },
+  "slow_reversal_backlash_K1e7_Dcrit": {
+   "max_angle_diff_vs_py": 9.898491657264752e-05,
+   "inside_gap_ml": 0.9764,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 1.7570189252431173e-06
+  },
+  "slow_reversal_backlash_K1e7_D0p01": {
+   "max_angle_diff_vs_py": 0.0011145328210959704,
+   "inside_gap_ml": 4.1745,
+   "inside_gap_py": 0.991825000000987,
+   "penetration_ml": 3.7809146582122935e-05
+  },
+  "sens_slow_reversal": {
+   "max_angle_spread": 0.0021885797292149,
+   "n": 6
+  }
+ }
+}

@@ -1,0 +1,2 @@
+- [RCV 쓰기 전 항상 확인](feedback_rcv_confirm_before_write.md) — research-note MCP 쓰기는 본문 보여주고 "올려" 승인 후에만
+- [RAMS 작업실 artifact](reference_rams_workspace_artifact.md) — URL, DB 컬렉션 구조, 이민혁 칸 대신 작성 주의

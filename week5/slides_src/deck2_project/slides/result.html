@@ -1,0 +1,8 @@
+<section id="result" data-transition="fade" style="background:#F4F6F9;color:#17202C;font-family:'Noto Sans KR','Malgun Gothic',Arial,sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:28px;font-weight:700;color:#2A5DB0;letter-spacing:2px">결론</p>
+<h2 style="font-size:58px;font-weight:700;line-height:1.15">두 환경의 차이는 허용치의 1/30 이하</h2>
+<img src="/_blob/214bfb57a3fd3ba777cc0178ead98780" alt="단계별 최대 각도 차이와 iq 차이, 허용치 비교" style="width:1350px;height:455px;object-fit:contain;background:#FFFFFF;border-radius:12px;border:2px solid #D6DCE6">
+<ul style="font-size:28px;line-height:1.45"><li>두 환경 모두 같은 액추에이터 모델(전류 제어, 전압 포화, 기어, 관성)을 구현할 수 있고 결과가 같다. MuJoCo는 전기 쪽을 코드로 넣어야 한다</li><li>한계: 가정값이고 하드웨어 검증이 아니다. 마찰·백래시·PWM·열은 다음 단계에서 확인하며, 이것만으로 시뮬레이터를 고르지는 않는다</li></ul>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#586374">5주차 진행 보고 · 6 / 9</p>
+<aside>각도는 허용치의 약 140분의 1, iq와 관절 토크는 약 30분의 1입니다. 허용치는 이번에 정한 잠정 기준입니다. 이 결과는 두 환경이 같은 가정 모델을 같게 계산한다는 뜻이고, 어느 시뮬레이터가 낫다는 뜻은 아닙니다.</aside>
+</section>

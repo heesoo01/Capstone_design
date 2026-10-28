@@ -1,0 +1,659 @@
+{
+ "checks": [
+  {
+   "group": "0",
+   "name": "thermal_constant_heat 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])",
+   "value": 0.0,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "0",
+   "name": "thermal_constant_current 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])",
+   "value": 1.4210854715202004e-14,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "0",
+   "name": "thermal_cooling 내 해석식이 민혁 해석 온도 열과 일치 (최대 차 [C])",
+   "value": 0.0,
+   "limit": 1e-09,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_heat MATLAB 온도 vs 해석식 최대 차 [C]",
+   "value": 5.542233338928781e-13,
+   "limit": 1e-08,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_heat MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 5.7980287238024175e-11,
+   "limit": 0.0001,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_heat MATLAB vs 민혁 온도 최대 차 [C]",
+   "value": 5.968558980384842e-13,
+   "limit": 2e-08,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_current MATLAB 온도 vs 해석식 최대 차 [C]",
+   "value": 1.2079226507921703e-13,
+   "limit": 1e-08,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_current MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 7.034373084024992e-12,
+   "limit": 0.0001,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_constant_current MATLAB vs 민혁 온도 최대 차 [C]",
+   "value": 1.2789769243681803e-13,
+   "limit": 2e-08,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_cooling MATLAB 온도 vs 해석식 최대 차 [C]",
+   "value": 1.7053025658242404e-13,
+   "limit": 1e-08,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_cooling MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 8.185452315956354e-12,
+   "limit": 0.0001,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "b",
+   "name": "thermal_cooling MATLAB vs 민혁 온도 최대 차 [C]",
+   "value": 2.6290081223123707e-13,
+   "limit": 2e-08,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최대 각도 차 [rad]",
+   "value": 6.905985775407242e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최대 샘플 iq 차 [A]",
+   "value": 0.00020739222904364585,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최대 관절 토크 차 [N*m]",
+   "value": 0.0003110883435706313,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최대 모터 토크 차 [N*m]",
+   "value": 6.221766871314371e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최대 권선 온도 차 [C]",
+   "value": 0.0,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최종 전기 입력 에너지 상대 차",
+   "value": 0.00045094452897765025,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 최종 동손 에너지 상대 차",
+   "value": 0.00026349674459071916,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 2.71050543121376e-20,
+   "limit": 1e-06,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 MATLAB 전기 변환 수지 잔차 최대 [J]",
+   "value": 8.55755849515916e-09,
+   "limit": 1e-07,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_fixed25 MATLAB 전체 수지 잔차 최대 [J]",
+   "value": 4.97027401735739e-08,
+   "limit": 0.002,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최대 각도 차 [rad]",
+   "value": 6.905972524104409e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최대 샘플 iq 차 [A]",
+   "value": 0.00020739218097654,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최대 관절 토크 차 [N*m]",
+   "value": 0.00031108827146297813,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최대 모터 토크 차 [N*m]",
+   "value": 6.221765429359483e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최대 권선 온도 차 [C]",
+   "value": 2.0000723210955584e-07,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최종 전기 입력 에너지 상대 차",
+   "value": 0.00045094420160976344,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 최종 동손 에너지 상대 차",
+   "value": 0.00026349681559897003,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 1.6940658945086e-21,
+   "limit": 1e-06,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 MATLAB 전기 변환 수지 잔차 최대 [J]",
+   "value": 8.55692110571238e-09,
+   "limit": 1e-07,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal25 MATLAB 전체 수지 잔차 최대 [J]",
+   "value": 4.9702404424784e-08,
+   "limit": 0.002,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최대 각도 차 [rad]",
+   "value": 6.956759091999998e-06,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최대 샘플 iq 차 [A]",
+   "value": 0.00019289169333491785,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최대 관절 토크 차 [N*m]",
+   "value": 0.0002893375400074838,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최대 모터 토크 차 [N*m]",
+   "value": 5.786750800049201e-05,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최대 권선 온도 차 [C]",
+   "value": 2.3542985161384422e-07,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최종 전기 입력 에너지 상대 차",
+   "value": 0.00038941147920545975,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 최종 동손 에너지 상대 차",
+   "value": 0.00025789236211179234,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 2.22773188784942e-14,
+   "limit": 1e-06,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 MATLAB 전기 변환 수지 잔차 최대 [J]",
+   "value": 8.03469588778194e-09,
+   "limit": 1e-07,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "baseline_thermal80 MATLAB 전체 수지 잔차 최대 [J]",
+   "value": 4.89556820221226e-08,
+   "limit": 0.002,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최대 각도 차 [rad]",
+   "value": 0.000261643681317425,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최대 샘플 iq 차 [A]",
+   "value": 0.001423914619066352,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최대 관절 토크 차 [N*m]",
+   "value": 0.0021358719286004857,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최대 모터 토크 차 [N*m]",
+   "value": 0.00042717438572,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 2% 정착시간 차 [s]",
+   "value": 0.0,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최대 권선 온도 차 [C]",
+   "value": 4.601435982465318e-06,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최종 전기 입력 에너지 상대 차",
+   "value": 0.00023684387069561143,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 최종 동손 에너지 상대 차",
+   "value": 0.0007334387733292652,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 0.0,
+   "limit": 1e-06,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 MATLAB 전기 변환 수지 잔차 최대 [J]",
+   "value": 9.9093988847887e-08,
+   "limit": 1e-07,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal25 MATLAB 전체 수지 잔차 최대 [J]",
+   "value": 3.58636137454127e-07,
+   "limit": 0.002,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최대 각도 차 [rad]",
+   "value": 0.00023842021977693584,
+   "limit": 0.001,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최대 샘플 iq 차 [A]",
+   "value": 0.0010928878408953402,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최대 관절 토크 차 [N*m]",
+   "value": 0.0016393317613485614,
+   "limit": 0.015,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최대 모터 토크 차 [N*m]",
+   "value": 0.0003278663522697234,
+   "limit": 0.003,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 2% 정착시간 차 [s]",
+   "value": 2.220446049250313e-16,
+   "limit": 0.01,
+   "source": "5주차",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최대 권선 온도 차 [C]",
+   "value": 4.9216601070156685e-06,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최종 전기 입력 에너지 상대 차",
+   "value": 0.00018450543575408227,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 최종 동손 에너지 상대 차",
+   "value": 0.0006997664951666319,
+   "limit": 0.001,
+   "source": "신규",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 MATLAB 열 에너지 수지 잔차 최대 [J]",
+   "value": 2.68396416203132e-14,
+   "limit": 1e-06,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 MATLAB 전기 변환 수지 잔차 최대 [J]",
+   "value": 8.10569030784691e-08,
+   "limit": 1e-07,
+   "source": "민혁",
+   "ok": true
+  },
+  {
+   "group": "d",
+   "name": "stress_thermal80 MATLAB 전체 수지 잔차 최대 [J]",
+   "value": 3.48989323106785e-07,
+   "limit": 0.002,
+   "source": "민혁",
+   "ok": true
+  }
+ ],
+ "metrics": {
+  "def_check_baseline_fixed25": {
+   "settle_mine": 0.8940000000000001,
+   "settle_summary": 0.8940000000000001,
+   "rmse_mine": 0.09038968214496516,
+   "rmse_summary": 0.09038968214496516,
+   "reproduced": true,
+   "limited_rows_mine": 0,
+   "limited_summary": 0
+  },
+  "def_check_baseline_thermal25": {
+   "settle_mine": 0.8940000000000001,
+   "settle_summary": 0.8940000000000001,
+   "rmse_mine": 0.09038968231061621,
+   "rmse_summary": 0.09038968231061621,
+   "reproduced": true,
+   "limited_rows_mine": 0,
+   "limited_summary": 0
+  },
+  "def_check_baseline_thermal80": {
+   "settle_mine": 0.8940000000000001,
+   "settle_summary": 0.8940000000000001,
+   "rmse_mine": 0.09041723920593227,
+   "rmse_summary": 0.09041723920593227,
+   "reproduced": true,
+   "limited_rows_mine": 0,
+   "limited_summary": 0
+  },
+  "def_check_stress_thermal25": {
+   "settle_mine": 1.237,
+   "settle_summary": 1.237,
+   "rmse_mine": 0.8515731692463194,
+   "rmse_summary": 0.8515731692463194,
+   "reproduced": true,
+   "limited_rows_mine": 6127,
+   "limited_summary": 6127
+  },
+  "def_check_stress_thermal80": {
+   "settle_mine": 1.2440000000000002,
+   "settle_summary": 1.2440000000000002,
+   "rmse_mine": 0.8567593876298366,
+   "rmse_summary": 0.8567593876298366,
+   "reproduced": true,
+   "limited_rows_mine": 6244,
+   "limited_summary": 6244
+  },
+  "def_check_thermal_constant_heat": {
+   "my_analytic_vs_py_analytic": 0.0,
+   "py_vs_analytic": 2.8421709430404007e-13
+  },
+  "def_check_thermal_constant_current": {
+   "my_analytic_vs_py_analytic": 1.4210854715202004e-14,
+   "py_vs_analytic": 9.237055564881302e-14
+  },
+  "def_check_thermal_cooling": {
+   "my_analytic_vs_py_analytic": 0.0,
+   "py_vs_analytic": 1.7053025658242404e-13
+  },
+  "thermal_heat": {
+   "max_T_err_vs_analytic": 5.542233338928781e-13,
+   "max_energy_residual": 5.7980287238024175e-11,
+   "max_T_diff_vs_py": 5.968558980384842e-13
+  },
+  "thermal_current": {
+   "max_T_err_vs_analytic": 1.2079226507921703e-13,
+   "max_energy_residual": 7.034373084024992e-12,
+   "max_T_diff_vs_py": 1.2789769243681803e-13
+  },
+  "thermal_cooling": {
+   "max_T_err_vs_analytic": 1.7053025658242404e-13,
+   "max_energy_residual": 8.185452315956354e-12,
+   "max_T_diff_vs_py": 2.6290081223123707e-13
+  },
+  "main_baseline_fixed25": {
+   "max_angle": 6.905985775407242e-06,
+   "max_iq": 0.00020739222904364585,
+   "max_dT": 0.0,
+   "T_final_ml": 25.0,
+   "T_final_py": 25.0,
+   "res_total_ml": 4.97027401735739e-08,
+   "res_total_py": 1.6654235926706618e-05
+  },
+  "main_baseline_thermal25": {
+   "max_angle": 6.905972524104409e-06,
+   "max_iq": 0.00020739218097654,
+   "max_dT": 2.0000723210955584e-07,
+   "T_final_ml": 25.0006438611195,
+   "T_final_py": 25.00064403079179,
+   "res_total_ml": 4.9702404424784e-08,
+   "res_total_py": 1.6654234922676425e-05
+  },
+  "main_baseline_thermal80": {
+   "max_angle": 6.956759091999998e-06,
+   "max_iq": 0.00019289169333491785,
+   "max_dT": 2.3542985161384422e-07,
+   "T_final_ml": 79.4535177631881,
+   "T_final_py": 79.45351796356522,
+   "res_total_ml": 4.89556820221226e-08,
+   "res_total_py": 1.652079222173205e-05
+  },
+  "main_stress_thermal25": {
+   "max_angle": 0.000261643681317425,
+   "max_iq": 0.001423914619066352,
+   "max_dT": 4.601435982465318e-06,
+   "T_final_ml": 25.0062278835316,
+   "T_final_py": 25.0062324565051,
+   "res_total_ml": 3.58636137454127e-07,
+   "res_total_py": 0.00015066334359575828
+  },
+  "main_stress_thermal80": {
+   "max_angle": 0.00023842021977693584,
+   "max_iq": 0.0010928878408953402,
+   "max_dT": 4.9216601070156685e-06,
+   "T_final_ml": 79.4597219389832,
+   "T_final_py": 79.4597268294033,
+   "res_total_ml": 3.48989323106785e-07,
+   "res_total_py": 0.00013768601554309257
+  }
+ }
+}

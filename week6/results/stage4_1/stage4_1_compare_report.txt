@@ -1,0 +1,151 @@
+4-1 비교 보고서: MATLAB/Simulink vs 이민혁 MuJoCo+Python (관절 건마찰)
+민혁 데이터: 이민혁\stage4\stage4\stage4_1_20261010_163707_661108
+MATLAB 데이터: matlab_results\stage4_1
+판정 기준 출처: [민혁]=README 4-1 §5, [5주차]=3단계 기준, [신규]=새 기준(사용자 승인 2026-10-11). 하드웨어 정확도 기준 아님.
+마찰 정의: 민혁 = MuJoCo frictionloss 0.05 N*m (제약, solref/solimp 는 MuJoCo 기본값 [0.02, 1.0] / [0.9, 0.95, 0.001, 0.5, 2.0]), MATLAB = Simscape Rotational Friction 블록(Coulomb=Breakaway 0.05, 점성 0, 속도 임계값 3개).
+두 마찰 모델은 정의가 달라 같은 조건이 아니다: 건마찰 케이스의 차이는 구현 오류와 모델 정의 차이를 구분할 수 없다.
+
+[0] 지표 정의 확인 (민혁 CSV 에 내 함수를 적용해 summary.json 값이 재현되는지)
+  baseline_step_baseline         RMSE 내 0.09038969 / summary 0.09038969 | 최종 오차 내 0.00007791 / summary 0.00007791 | 정착 내 0.894 / summary 0.894 -> 재현 OK
+  baseline_step_dry_friction     RMSE 내 0.09361637 / summary 0.09361637 | 최종 오차 내 0.01250841 / summary 0.01250841 | 정착 내 nan / summary nan -> 재현 OK
+  small_step_baseline            RMSE 내 0.00241601 / summary 0.00241601 | 최종 오차 내 0.00000002 / summary 0.00000002 | 정착 내 0.894 / summary 0.894 -> 재현 OK
+  small_step_dry_friction        RMSE 내 0.00905849 / summary 0.00905849 | 최종 오차 내 0.00813927 / summary 0.00813927 | 정착 내 nan / summary nan -> 재현 OK
+  slow_reversal_baseline         RMSE 내 0.02137279 / summary 0.02137279 | 최종 오차 내 0.03089430 / summary 0.03089430 -> 재현 OK
+  slow_reversal_dry_friction     RMSE 내 0.02923882 / summary 0.02923882 | 최종 오차 내 0.04098678 / summary 0.04098678 -> 재현 OK
+  hold_restart_baseline          RMSE 내 0.04851673 / summary 0.04851673 | 최종 오차 내 0.00000351 / summary 0.00000351 | 재출발 내 0.0140 / summary 0.0140 -> 재현 OK
+  hold_restart_dry_friction      RMSE 내 0.05004173 / summary 0.05004173 | 최종 오차 내 0.01191349 / summary 0.01191349 | 재출발 내 0.0150 / summary 0.0150 -> 재현 OK
+
+[a] baseline (마찰 없음, 같은 정의): MATLAB vs 민혁
+ baseline_step
+  [PASS] baseline_step_baseline 최대 각도 차 [rad]                               6.85e-06 <= 0.001  [5주차]
+  [PASS] baseline_step_baseline 최대 샘플 iq 차 [A]                              0.000207 <= 0.01  [5주차]
+  [PASS] baseline_step_baseline 최대 관절 토크 차 [N*m]                            0.0003104 <= 0.015  [5주차]
+  [PASS] baseline_step_baseline 최대 모터 토크 차 [N*m]                            6.209e-05 <= 0.003  [5주차]
+  [PASS] baseline_step_baseline 2% 정착시간 차 [s]                               0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+ small_step
+  [PASS] small_step_baseline 최대 각도 차 [rad]                                  2.275e-07 <= 0.001  [5주차]
+  [PASS] small_step_baseline 최대 샘플 iq 차 [A]                                 6.933e-06 <= 0.01  [5주차]
+  [PASS] small_step_baseline 최대 관절 토크 차 [N*m]                               1.04e-05 <= 0.015  [5주차]
+  [PASS] small_step_baseline 최대 모터 토크 차 [N*m]                               2.08e-06 <= 0.003  [5주차]
+  [PASS] small_step_baseline 2% 정착시간 차 [s]                                  0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+ slow_reversal
+  [PASS] slow_reversal_baseline 최대 각도 차 [rad]                               5.31e-07 <= 0.001  [5주차]
+  [PASS] slow_reversal_baseline 최대 샘플 iq 차 [A]                              1.757e-06 <= 0.01  [5주차]
+  [PASS] slow_reversal_baseline 최대 관절 토크 차 [N*m]                            2.635e-06 <= 0.015  [5주차]
+  [PASS] slow_reversal_baseline 최대 모터 토크 차 [N*m]                            5.27e-07 <= 0.003  [5주차]
+ hold_restart
+  [PASS] hold_restart_baseline 최대 각도 차 [rad]                                5.475e-06 <= 0.001  [5주차]
+  [PASS] hold_restart_baseline 최대 샘플 iq 차 [A]                               0.0001657 <= 0.01  [5주차]
+  [PASS] hold_restart_baseline 최대 관절 토크 차 [N*m]                             0.0002485 <= 0.015  [5주차]
+  [PASS] hold_restart_baseline 최대 모터 토크 차 [N*m]                             4.97e-05 <= 0.003  [5주차]
+
+[b] 건마찰 0.05 N*m: MATLAB(Simscape Rotational Friction, 속도 임계값 3개) vs 민혁(MuJoCo frictionloss)
+  ※ 정의가 달라 이 절의 FAIL 은 구현 오류의 증거가 아니다. 판정 기준은 5주차 값 그대로 두었고 완화하지 않았다.
+ baseline_step dry vb0p001 (속도 임계값 0.001 rad/s)
+  [PASS] baseline_step dry vb0p001 최대 각도 차 [rad]                            6.573e-05 <= 0.001  [5주차]
+  [PASS] baseline_step dry vb0p001 최대 샘플 iq 차 [A]                           0.0005315 <= 0.01  [5주차]
+  [PASS] baseline_step dry vb0p001 최대 관절 토크 차 [N*m]                         0.0007972 <= 0.015  [5주차]
+  [PASS] baseline_step dry vb0p001 최대 모터 토크 차 [N*m]                         0.0001594 <= 0.003  [5주차]
+  [N/A ] baseline_step dry vb0p001 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.093617 / 민혁 0.093616 rad | 최종 오차 MATLAB 0.01257 / 민혁 0.01251 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01250 / 민혁 0.01249 rad
+ baseline_step dry vb0p01 (속도 임계값 0.01 rad/s)
+  [PASS] baseline_step dry vb0p01 최대 각도 차 [rad]                             0.000325 <= 0.001  [5주차]
+  [PASS] baseline_step dry vb0p01 최대 샘플 iq 차 [A]                            0.001394 <= 0.01  [5주차]
+  [PASS] baseline_step dry vb0p01 최대 관절 토크 차 [N*m]                          0.002091 <= 0.015  [5주차]
+  [PASS] baseline_step dry vb0p01 최대 모터 토크 차 [N*m]                          0.0004182 <= 0.003  [5주차]
+  [N/A ] baseline_step dry vb0p01 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.093609 / 민혁 0.093616 rad | 최종 오차 MATLAB 0.01218 / 민혁 0.01251 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01247 / 민혁 0.01249 rad
+ baseline_step dry vb0p1 (속도 임계값 0.1 rad/s)
+  [FAIL] baseline_step dry vb0p1 최대 각도 차 [rad]                              0.00431 <= 0.001  [5주차]
+  [FAIL] baseline_step dry vb0p1 최대 샘플 iq 차 [A]                             0.0148 <= 0.01  [5주차]
+  [FAIL] baseline_step dry vb0p1 최대 관절 토크 차 [N*m]                           0.02219 <= 0.015  [5주차]
+  [FAIL] baseline_step dry vb0p1 최대 모터 토크 차 [N*m]                           0.004439 <= 0.003  [5주차]
+  [N/A ] baseline_step dry vb0p1 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.093492 / 민혁 0.093616 rad | 최종 오차 MATLAB 0.00820 / 민혁 0.01251 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01229 / 민혁 0.01249 rad
+  (참고) baseline_step: 속도 임계값 3개 사이 최대 각도 차 4.3753e-03 rad (관측값, 합격 조건 아님)
+ small_step dry vb0p001 (속도 임계값 0.001 rad/s)
+  [FAIL] small_step dry vb0p001 최대 각도 차 [rad]                               0.001564 <= 0.001  [5주차]
+  [PASS] small_step dry vb0p001 최대 샘플 iq 차 [A]                              0.004499 <= 0.01  [5주차]
+  [PASS] small_step dry vb0p001 최대 관절 토크 차 [N*m]                            0.006748 <= 0.015  [5주차]
+  [PASS] small_step dry vb0p001 최대 모터 토크 차 [N*m]                            0.00135 <= 0.003  [5주차]
+  [N/A ] small_step dry vb0p001 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.009851 / 민혁 0.009058 rad | 최종 오차 MATLAB 0.00970 / 민혁 0.00814 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.00983 / 민혁 0.00918 rad
+ small_step dry vb0p01 (속도 임계값 0.01 rad/s)
+  [PASS] small_step dry vb0p01 최대 각도 차 [rad]                                0.0004839 <= 0.001  [5주차]
+  [PASS] small_step dry vb0p01 최대 샘플 iq 차 [A]                               0.001348 <= 0.01  [5주차]
+  [PASS] small_step dry vb0p01 최대 관절 토크 차 [N*m]                             0.002022 <= 0.015  [5주차]
+  [PASS] small_step dry vb0p01 최대 모터 토크 차 [N*m]                             0.0004045 <= 0.003  [5주차]
+  [N/A ] small_step dry vb0p01 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.008777 / 민혁 0.009058 rad | 최종 오차 MATLAB 0.00766 / 민혁 0.00814 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.00895 / 민혁 0.00918 rad
+ small_step dry vb0p1 (속도 임계값 0.1 rad/s)
+  [FAIL] small_step dry vb0p1 최대 각도 차 [rad]                                 0.006649 <= 0.001  [5주차]
+  [FAIL] small_step dry vb0p1 최대 샘플 iq 차 [A]                                0.01799 <= 0.01  [5주차]
+  [FAIL] small_step dry vb0p1 최대 관절 토크 차 [N*m]                              0.02698 <= 0.015  [5주차]
+  [FAIL] small_step dry vb0p1 최대 모터 토크 차 [N*m]                              0.005396 <= 0.003  [5주차]
+  [N/A ] small_step dry vb0p1 2% 정착시간: 양쪽 모두 관찰 구간 안에 정착하지 않음
+  (참고) RMSE MATLAB 0.005019 / 민혁 0.009058 rad | 최종 오차 MATLAB 0.00149 / 민혁 0.00814 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.00574 / 민혁 0.00918 rad
+  (참고) small_step: 속도 임계값 3개 사이 최대 각도 차 8.2136e-03 rad (관측값, 합격 조건 아님)
+ slow_reversal dry vb0p001 (속도 임계값 0.001 rad/s)
+  [PASS] slow_reversal dry vb0p001 최대 각도 차 [rad]                            7.344e-05 <= 0.001  [5주차]
+  [PASS] slow_reversal dry vb0p001 최대 샘플 iq 차 [A]                           0.000663 <= 0.01  [5주차]
+  [PASS] slow_reversal dry vb0p001 최대 관절 토크 차 [N*m]                         0.0009945 <= 0.015  [5주차]
+  [PASS] slow_reversal dry vb0p001 최대 모터 토크 차 [N*m]                         0.0001989 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.029243 / 민혁 0.029239 rad | 최종 오차 MATLAB 0.04099 / 민혁 0.04099 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01249 / 민혁 0.01249 rad
+ slow_reversal dry vb0p01 (속도 임계값 0.01 rad/s)
+  [PASS] slow_reversal dry vb0p01 최대 각도 차 [rad]                             7.341e-05 <= 0.001  [5주차]
+  [PASS] slow_reversal dry vb0p01 최대 샘플 iq 차 [A]                            0.0007687 <= 0.01  [5주차]
+  [PASS] slow_reversal dry vb0p01 최대 관절 토크 차 [N*m]                          0.001153 <= 0.015  [5주차]
+  [PASS] slow_reversal dry vb0p01 최대 모터 토크 차 [N*m]                          0.0002306 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.029221 / 민혁 0.029239 rad | 최종 오차 MATLAB 0.04097 / 민혁 0.04099 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01249 / 민혁 0.01249 rad
+ slow_reversal dry vb0p1 (속도 임계값 0.1 rad/s)
+  [PASS] slow_reversal dry vb0p1 최대 각도 차 [rad]                              0.0009207 <= 0.001  [5주차]
+  [PASS] slow_reversal dry vb0p1 최대 샘플 iq 차 [A]                             0.006975 <= 0.01  [5주차]
+  [PASS] slow_reversal dry vb0p1 최대 관절 토크 차 [N*m]                           0.01046 <= 0.015  [5주차]
+  [PASS] slow_reversal dry vb0p1 최대 모터 토크 차 [N*m]                           0.002092 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.029074 / 민혁 0.029239 rad | 최종 오차 MATLAB 0.04081 / 민혁 0.04099 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01248 / 민혁 0.01249 rad
+  (참고) slow_reversal: 속도 임계값 3개 사이 최대 각도 차 9.8300e-04 rad (관측값, 합격 조건 아님)
+ hold_restart dry vb0p001 (속도 임계값 0.001 rad/s)
+  [PASS] hold_restart dry vb0p001 최대 각도 차 [rad]                             0.0006985 <= 0.001  [5주차]
+  [PASS] hold_restart dry vb0p001 최대 샘플 iq 차 [A]                            0.002416 <= 0.01  [5주차]
+  [PASS] hold_restart dry vb0p001 최대 관절 토크 차 [N*m]                          0.003623 <= 0.015  [5주차]
+  [PASS] hold_restart dry vb0p001 최대 모터 토크 차 [N*m]                          0.0007247 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.049957 / 민혁 0.050042 rad | 최종 오차 MATLAB 0.01239 / 민혁 0.01191 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01249 / 민혁 0.01248 rad, 재출발 시간(2.8 s 후 1 mrad) MATLAB 0.0150 / 민혁 0.0150 s
+ hold_restart dry vb0p01 (속도 임계값 0.01 rad/s)
+  [PASS] hold_restart dry vb0p01 최대 각도 차 [rad]                              0.0008505 <= 0.001  [5주차]
+  [PASS] hold_restart dry vb0p01 최대 샘플 iq 차 [A]                             0.002496 <= 0.01  [5주차]
+  [PASS] hold_restart dry vb0p01 최대 관절 토크 차 [N*m]                           0.003744 <= 0.015  [5주차]
+  [PASS] hold_restart dry vb0p01 최대 모터 토크 차 [N*m]                           0.0007488 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.050115 / 민혁 0.050042 rad | 최종 오차 MATLAB 0.01120 / 민혁 0.01191 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01244 / 민혁 0.01248 rad, 재출발 시간(2.8 s 후 1 mrad) MATLAB 0.0150 / 민혁 0.0150 s
+ hold_restart dry vb0p1 (속도 임계값 0.1 rad/s)
+  [FAIL] hold_restart dry vb0p1 최대 각도 차 [rad]                               0.007529 <= 0.001  [5주차]
+  [FAIL] hold_restart dry vb0p1 최대 샘플 iq 차 [A]                              0.02133 <= 0.01  [5주차]
+  [FAIL] hold_restart dry vb0p1 최대 관절 토크 차 [N*m]                            0.03199 <= 0.015  [5주차]
+  [FAIL] hold_restart dry vb0p1 최대 모터 토크 차 [N*m]                            0.006398 <= 0.003  [5주차]
+  (참고) RMSE MATLAB 0.050700 / 민혁 0.050042 rad | 최종 오차 MATLAB 0.00519 / 민혁 0.01191 rad | 마찰 on-off 최대 각도 효과 MATLAB 0.01218 / 민혁 0.01248 rad, 재출발 시간(2.8 s 후 1 mrad) MATLAB 0.0150 / 민혁 0.0150 s
+  (참고) hold_restart: 속도 임계값 3개 사이 최대 각도 차 8.2225e-03 rad (관측값, 합격 조건 아님)
+
+[c] MATLAB 자체 간격 수렴 (slow_reversal, dry, 속도 임계값 0.01 rad/s, 최대 스텝 5 us vs 2.5 us)
+  [PASS] MATLAB 5 us vs 2.5 us 최대 각도 차 [rad]                                6.933e-09 <= 0.0002  [신규] (값은 민혁 README §5 의 MuJoCo dt 수렴 기준을 재사용)
+  [PASS] MATLAB 5 us vs 2.5 us 최대 속도 차 [rad/s]                              2.697e-08 <= 0.003  [신규]
+  [PASS] MATLAB 5 us vs 2.5 us 최대 iq 차 [A]                                  1.422e-08 <= 0.005  [신규]
+
+[요약]
+  검사 69개 중 56개 통과, 13개 실패
+   절 [a]: 18개 중 18개 통과
+   절 [b]: 48개 중 35개 통과
+   절 [c]: 3개 중 3개 통과
+  실패: [b] baseline_step dry vb0p1 최대 각도 차 [rad] = 0.00431 (기준 0.001, 5주차)
+  실패: [b] baseline_step dry vb0p1 최대 샘플 iq 차 [A] = 0.0148 (기준 0.01, 5주차)
+  실패: [b] baseline_step dry vb0p1 최대 관절 토크 차 [N*m] = 0.02219 (기준 0.015, 5주차)
+  실패: [b] baseline_step dry vb0p1 최대 모터 토크 차 [N*m] = 0.004439 (기준 0.003, 5주차)
+  실패: [b] small_step dry vb0p001 최대 각도 차 [rad] = 0.001564 (기준 0.001, 5주차)
+  실패: [b] small_step dry vb0p1 최대 각도 차 [rad] = 0.006649 (기준 0.001, 5주차)
+  실패: [b] small_step dry vb0p1 최대 샘플 iq 차 [A] = 0.01799 (기준 0.01, 5주차)
+  실패: [b] small_step dry vb0p1 최대 관절 토크 차 [N*m] = 0.02698 (기준 0.015, 5주차)
+  실패: [b] small_step dry vb0p1 최대 모터 토크 차 [N*m] = 0.005396 (기준 0.003, 5주차)
+  실패: [b] hold_restart dry vb0p1 최대 각도 차 [rad] = 0.007529 (기준 0.001, 5주차)
+  실패: [b] hold_restart dry vb0p1 최대 샘플 iq 차 [A] = 0.02133 (기준 0.01, 5주차)
+  실패: [b] hold_restart dry vb0p1 최대 관절 토크 차 [N*m] = 0.03199 (기준 0.015, 5주차)
+  실패: [b] hold_restart dry vb0p1 최대 모터 토크 차 [N*m] = 0.006398 (기준 0.003, 5주차)
+  하지 않은 것: MuJoCo 내부 검사(운동방정식 잔차, 제약 일 비양수 등), 민혁 단독 마찰 probe 의 MATLAB 대응, 25/12.5/6.25 us 수렴(MATLAB 은 가변 스텝).
+  PASS 는 위 기준(출처 표시) 안에 들어왔다는 뜻이며 실제 하드웨어와 일치한다는 뜻이 아니다. [신규] 기준은 사용자 승인(2026-10-11)을 받았다.

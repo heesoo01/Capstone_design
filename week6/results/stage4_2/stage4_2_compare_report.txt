@@ -1,0 +1,253 @@
+4-2 비교 보고서: MATLAB/Simulink vs 이민혁 MuJoCo+Python (기어 백래시)
+민혁 데이터: 이민혁\stage4\stage4\stage4_2_20261010_171110_388105
+MATLAB 데이터: matlab_results\stage4_2
+판정 기준 출처: [민혁]=README 4-2 §9, [5주차]=3단계 기준, [신규]=새 기준(사용자 승인 2026-10-11). 하드웨어 정확도 기준 아님.
+접촉 정의: 민혁 = MuJoCo soft limit (solref [0.001, 1.0], solimp [0.99, 0.99, 0.001, 0.5, 2.0]), MATLAB = Simscape Multibody 관절 한계(K, D, 전환 폭 1e-7 rad). 1:1 변환 불가 -> K{1e5,1e6,1e7} x D{임계감쇠 근사, 0.01} 6개 설정.
+같게 맞춘 것은 유격 폭(반폭 0.0087266 rad)뿐이다. 접촉 거동의 차이는 구현 오류와 접촉 모델 정의 차이를 구분할 수 없다.
+
+[0] 지표 정의 확인 (민혁 CSV 에 내 함수를 적용해 summary.json 값이 재현되는지)
+  baseline_step_rigid_reference      RMSE 내 0.09038969 / summary 0.09038969 | 정착 내 0.894 / summary 0.894 -> 재현 OK
+  baseline_step_near_zero_gap        RMSE 내 0.09038971 / summary 0.09038971 | 정착 내 0.894 / summary 0.894 | 유격 안 시간 내 0.2024 / summary 0.2024 s -> 재현 OK
+  baseline_step_backlash             RMSE 내 0.09038879 / summary 0.09038879 | 정착 내 0.895 / summary 0.895 | 유격 안 시간 내 0.2658 / summary 0.2657 s -> 재현 OK
+  reversal_steps_rigid_reference     RMSE 내 0.07266317 / summary 0.07266317 -> 재현 OK
+  reversal_steps_near_zero_gap       RMSE 내 0.07266317 / summary 0.07266317 | 유격 안 시간 내 0.2080 / summary 0.2079 s -> 재현 OK
+  reversal_steps_backlash            RMSE 내 0.07264385 / summary 0.07264385 | 유격 안 시간 내 0.4243 / summary 0.4241 s -> 재현 OK
+  slow_reversal_rigid_reference      RMSE 내 0.02137279 / summary 0.02137279 -> 재현 OK
+  slow_reversal_near_zero_gap        RMSE 내 0.02137279 / summary 0.02137279 | 유격 안 시간 내 0.2251 / summary 0.2250 s -> 재현 OK
+  slow_reversal_backlash             RMSE 내 0.02135856 / summary 0.02135856 | 유격 안 시간 내 0.9919 / summary 0.9918 s -> 재현 OK
+
+[a] rigid_reference (5주차 3-2 그대로, 같은 정의): MATLAB vs 민혁
+ baseline_step
+  [PASS] baseline_step rigid 최대 각도 차 [rad]                                      6.848e-06 <= 0.001  [5주차]
+  [PASS] baseline_step rigid 최대 샘플 iq 차 [A]                                     0.000207 <= 0.01  [5주차]
+  [PASS] baseline_step rigid 최대 관절 토크 차 [N*m]                                   0.0003104 <= 0.015  [5주차]
+  [PASS] baseline_step rigid 최대 모터 토크 차 [N*m]                                   6.209e-05 <= 0.003  [5주차]
+  [PASS] baseline_step rigid 2% 정착시간 차 [s]                                      0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+ reversal_steps
+  [PASS] reversal_steps rigid 최대 각도 차 [rad]                                     5.6e-06 <= 0.001  [5주차]
+  [PASS] reversal_steps rigid 최대 샘플 iq 차 [A]                                    0.0001658 <= 0.01  [5주차]
+  [PASS] reversal_steps rigid 최대 관절 토크 차 [N*m]                                  0.0002487 <= 0.015  [5주차]
+  [PASS] reversal_steps rigid 최대 모터 토크 차 [N*m]                                  4.973e-05 <= 0.003  [5주차]
+ slow_reversal
+  [PASS] slow_reversal rigid 최대 각도 차 [rad]                                      5.309e-07 <= 0.001  [5주차]
+  [PASS] slow_reversal rigid 최대 샘플 iq 차 [A]                                     1.757e-06 <= 0.01  [5주차]
+  [PASS] slow_reversal rigid 최대 관절 토크 차 [N*m]                                   2.636e-06 <= 0.015  [5주차]
+  [PASS] slow_reversal rigid 최대 모터 토크 차 [N*m]                                   5.271e-07 <= 0.003  [5주차]
+
+전달 토크 부호 확인 (reversal_steps/backlash/K1e6/Dcrit): 부하 운동방정식 J*qdd + B*qd = tau 의 잔차 RMS  (+): 0.2023, (-): 0.3351 N*m -> 부호 +1 채택 (잔차는 수치미분 qdd 를 포함하는 관측값)
+
+[b] near_zero_gap (±1e-6 rad): MATLAB(K=1e6, 임계 감쇠 근사) vs 민혁
+ baseline_step
+  [PASS] baseline_step near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]                   6.838e-06 <= 0.001  [5주차]
+  [PASS] baseline_step near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]                  0.0002084 <= 0.01  [5주차]
+  [PASS] baseline_step near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]                0.0003127 <= 0.015  [5주차]
+  [PASS] baseline_step near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]                6.253e-05 <= 0.003  [5주차]
+  [PASS] baseline_step near_zero_gap K1e6 Dcrit 2% 정착시간 차 [s]                   0 <= 0.01  [5주차] (MATLAB 0.894 / 민혁 0.894 s)
+  (참고) 유격 안 시간 MATLAB 0.2028 / 민혁 0.2024 s | 한계 초과(침투) 최대 MATLAB 1.016e-06 / 민혁 4.224e-06 rad | 모터/N-부하 속도 차 최대 MATLAB 0.0063 / 민혁 nan rad/s, 전달 토크 피크 MATLAB 1.016 / 민혁 1.016 N*m (접촉 모델 의존, 판정 아님)
+  (참고) baseline_step: MATLAB near_zero_gap vs MATLAB rigid 최대 각도 차 9.728e-08 rad (민혁 near_zero_gap vs rigid 2.225e-07 rad)
+ reversal_steps
+  [PASS] reversal_steps near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]                  5.657e-06 <= 0.001  [5주차]
+  [PASS] reversal_steps near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]                 0.0001723 <= 0.01  [5주차]
+  [PASS] reversal_steps near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]               0.0002585 <= 0.015  [5주차]
+  [PASS] reversal_steps near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]               5.169e-05 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.2097 / 민혁 0.2079 s | 한계 초과(침투) 최대 MATLAB 8.129e-07 / 민혁 3.381e-06 rad | 모터/N-부하 속도 차 최대 MATLAB 0.0045 / 민혁 nan rad/s, 전달 토크 피크 MATLAB 0.813 / 민혁 0.813 N*m (접촉 모델 의존, 판정 아님)
+  (참고) reversal_steps: MATLAB near_zero_gap vs MATLAB rigid 최대 각도 차 8.296e-08 rad (민혁 near_zero_gap vs rigid 1.585e-07 rad)
+ slow_reversal
+  [PASS] slow_reversal near_zero_gap K1e6 Dcrit 최대 각도 차 [rad]                   5.286e-07 <= 0.001  [5주차]
+  [PASS] slow_reversal near_zero_gap K1e6 Dcrit 최대 샘플 iq 차 [A]                  6.735e-06 <= 0.01  [5주차]
+  [PASS] slow_reversal near_zero_gap K1e6 Dcrit 최대 관절 토크 차 [N*m]                1.01e-05 <= 0.015  [5주차]
+  [PASS] slow_reversal near_zero_gap K1e6 Dcrit 최대 모터 토크 차 [N*m]                2.02e-06 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.2352 / 민혁 0.2250 s | 한계 초과(침투) 최대 MATLAB 4.844e-08 / 민혁 2.890e-07 rad | 모터/N-부하 속도 차 최대 MATLAB 0.0008 / 민혁 nan rad/s, 전달 토크 피크 MATLAB 0.022 / 민혁 0.022 N*m (접촉 모델 의존, 판정 아님)
+  (참고) slow_reversal: MATLAB near_zero_gap vs MATLAB rigid 최대 각도 차 9.108e-08 rad (민혁 near_zero_gap vs rigid 9.707e-08 rad)
+
+[c] backlash (±0.5도): MATLAB 접촉 설정 6개 vs 민혁
+  ※ 접촉 정의가 달라 이 절의 FAIL 은 구현 오류의 증거가 아니다. 판정 기준은 5주차 값 그대로 두었고 완화하지 않았다.
+ baseline_step backlash_K1e5_Dcrit
+  [PASS] baseline_step backlash_K1e5_Dcrit 최대 각도 차 [rad]                        4.059e-05 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]                       0.01635 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]                     0.02453 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]                     0.004906 <= 0.003  [5주차]
+  [PASS] baseline_step backlash_K1e5_Dcrit 2% 정착시간 차 [s]                        0 <= 0.01  [5주차] (MATLAB 0.895 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 0.2695 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 1.509e-04 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5960 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 40.541 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+ baseline_step backlash_K1e5_D0p01
+  [PASS] baseline_step backlash_K1e5_D0p01 최대 각도 차 [rad]                        0.0009435 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e5_D0p01 최대 샘플 iq 차 [A]                       0.1066 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]                     0.1599 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]                     0.03199 <= 0.003  [5주차]
+  [FAIL] baseline_step backlash_K1e5_D0p01 2% 정착시간 차 [s]                        0.014 <= 0.01  [5주차] (MATLAB 0.909 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 1.8951 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 4.094e-04 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5960 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 40.936 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+ baseline_step backlash_K1e6_Dcrit
+  [PASS] baseline_step backlash_K1e6_Dcrit 최대 각도 차 [rad]                        4.429e-05 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]                       0.02244 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]                     0.03366 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]                     0.006732 <= 0.003  [5주차]
+  [PASS] baseline_step backlash_K1e6_Dcrit 2% 정착시간 차 [s]                        0 <= 0.01  [5주차] (MATLAB 0.895 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 0.2718 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 4.420e-05 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5960 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 18.900 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+ baseline_step backlash_K1e6_D0p01
+  [FAIL] baseline_step backlash_K1e6_D0p01 최대 각도 차 [rad]                        0.001263 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e6_D0p01 최대 샘플 iq 차 [A]                       0.1055 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]                     0.1583 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]                     0.03166 <= 0.003  [5주차]
+  [FAIL] baseline_step backlash_K1e6_D0p01 2% 정착시간 차 [s]                        0.035 <= 0.01  [5주차] (MATLAB 0.930 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 1.9681 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 1.270e-04 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.6005 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 127.027 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+ baseline_step backlash_K1e7_Dcrit
+  [PASS] baseline_step backlash_K1e7_Dcrit 최대 각도 차 [rad]                        4.535e-05 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]                       0.03128 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]                     0.04692 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]                     0.009384 <= 0.003  [5주차]
+  [PASS] baseline_step backlash_K1e7_Dcrit 2% 정착시간 차 [s]                        0 <= 0.01  [5주차] (MATLAB 0.895 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 0.2727 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 1.196e-06 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5960 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 1.069 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+ baseline_step backlash_K1e7_D0p01
+  [PASS] baseline_step backlash_K1e7_D0p01 최대 각도 차 [rad]                        0.0008612 <= 0.001  [5주차]
+  [FAIL] baseline_step backlash_K1e7_D0p01 최대 샘플 iq 차 [A]                       0.13 <= 0.01  [5주차]
+  [FAIL] baseline_step backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]                     0.195 <= 0.015  [5주차]
+  [FAIL] baseline_step backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]                     0.03901 <= 0.003  [5주차]
+  [PASS] baseline_step backlash_K1e7_D0p01 2% 정착시간 차 [s]                        0.002 <= 0.01  [5주차] (MATLAB 0.893 / 민혁 0.895 s)
+  (참고) 유격 안 시간 MATLAB 1.9898 / 민혁 0.2657 s | 한계 초과(침투) 최대 MATLAB 3.664e-05 / 민혁 9.178e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5992 / 민혁 2.5961 rad/s, 전달 토크 피크 MATLAB 366.398 / 민혁 12.130 N*m (접촉 모델 의존, 판정 아님)
+  (참고) baseline_step: MATLAB backlash(K1e6,Dcrit) vs near_zero_gap 최대 각도 차 6.826e-04 rad, 최대 iq 차 5.983e-02 A | 민혁 6.833e-04 rad, 5.161e-02 A
+  (참고) baseline_step: 접촉 설정 6개 사이 최대 각도 차 1.6748e-03 rad (관측값, 합격 조건 아님)
+ reversal_steps backlash_K1e5_Dcrit
+  [PASS] reversal_steps backlash_K1e5_Dcrit 최대 각도 차 [rad]                       2.934e-05 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]                      0.01394 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]                    0.02092 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]                    0.004183 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.4310 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 9.810e-05 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 1.7286 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 22.207 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+ reversal_steps backlash_K1e5_D0p01
+  [FAIL] reversal_steps backlash_K1e5_D0p01 최대 각도 차 [rad]                       0.001093 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_D0p01 최대 샘플 iq 차 [A]                      0.1347 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]                    0.2021 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]                    0.04042 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 3.9573 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 5.908e-04 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 3.9054 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 59.093 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+ reversal_steps backlash_K1e6_Dcrit
+  [PASS] reversal_steps backlash_K1e6_Dcrit 최대 각도 차 [rad]                       3.233e-05 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]                      0.02195 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]                    0.03292 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]                    0.006584 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.4351 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 2.563e-05 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 1.7286 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 14.711 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+ reversal_steps backlash_K1e6_D0p01
+  [FAIL] reversal_steps backlash_K1e6_D0p01 최대 각도 차 [rad]                       0.001483 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_D0p01 최대 샘플 iq 차 [A]                      0.1331 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]                    0.1997 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]                    0.03994 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 4.1253 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 1.636e-04 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 3.6178 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 163.585 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+ reversal_steps backlash_K1e7_Dcrit
+  [PASS] reversal_steps backlash_K1e7_Dcrit 최대 각도 차 [rad]                       3.325e-05 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]                      0.02787 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]                    0.04181 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]                    0.008362 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.4376 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 1.274e-06 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 1.7286 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 17.214 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+ reversal_steps backlash_K1e7_D0p01
+  [FAIL] reversal_steps backlash_K1e7_D0p01 최대 각도 차 [rad]                       0.001249 <= 0.001  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_D0p01 최대 샘플 iq 차 [A]                      0.1369 <= 0.01  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]                    0.2054 <= 0.015  [5주차]
+  [FAIL] reversal_steps backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]                    0.04108 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 4.1765 / 민혁 0.4241 s | 한계 초과(침투) 최대 MATLAB 3.805e-05 / 민혁 6.386e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.8154 / 민혁 1.7303 rad/s, 전달 토크 피크 MATLAB 380.551 / 민혁 7.896 N*m (접촉 모델 의존, 판정 아님)
+  (참고) reversal_steps: MATLAB backlash(K1e6,Dcrit) vs near_zero_gap 최대 각도 차 6.360e-04 rad, 최대 iq 차 5.368e-02 A | 민혁 6.332e-04 rad, 4.280e-02 A
+  (참고) reversal_steps: 접촉 설정 6개 사이 최대 각도 차 1.6449e-03 rad (관측값, 합격 조건 아님)
+ slow_reversal backlash_K1e5_Dcrit
+  [PASS] slow_reversal backlash_K1e5_Dcrit 최대 각도 차 [rad]                        9.506e-05 <= 0.001  [5주차]
+  [PASS] slow_reversal backlash_K1e5_Dcrit 최대 샘플 iq 차 [A]                       0.008906 <= 0.01  [5주차]
+  [PASS] slow_reversal backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m]                     0.01336 <= 0.015  [5주차]
+  [PASS] slow_reversal backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m]                     0.002672 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.9670 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 2.317e-05 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 0.4081 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 7.924 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+ slow_reversal backlash_K1e5_D0p01
+  [PASS] slow_reversal backlash_K1e5_D0p01 최대 각도 차 [rad]                        0.0007749 <= 0.001  [5주차]
+  [FAIL] slow_reversal backlash_K1e5_D0p01 최대 샘플 iq 차 [A]                       0.1118 <= 0.01  [5주차]
+  [FAIL] slow_reversal backlash_K1e5_D0p01 최대 관절 토크 차 [N*m]                     0.1676 <= 0.015  [5주차]
+  [FAIL] slow_reversal backlash_K1e5_D0p01 최대 모터 토크 차 [N*m]                     0.03353 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 3.9644 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 3.887e-04 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5093 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 38.871 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+ slow_reversal backlash_K1e6_Dcrit
+  [PASS] slow_reversal backlash_K1e6_Dcrit 최대 각도 차 [rad]                        0.0001019 <= 0.001  [5주차]
+  [PASS] slow_reversal backlash_K1e6_Dcrit 최대 샘플 iq 차 [A]                       0.008734 <= 0.01  [5주차]
+  [PASS] slow_reversal backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m]                     0.0131 <= 0.015  [5주차]
+  [PASS] slow_reversal backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m]                     0.00262 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.9720 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 6.627e-06 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 0.4081 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 14.414 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+ slow_reversal backlash_K1e6_D0p01
+  [FAIL] slow_reversal backlash_K1e6_D0p01 최대 각도 차 [rad]                        0.001638 <= 0.001  [5주차]
+  [FAIL] slow_reversal backlash_K1e6_D0p01 최대 샘플 iq 차 [A]                       0.1113 <= 0.01  [5주차]
+  [FAIL] slow_reversal backlash_K1e6_D0p01 최대 관절 토크 차 [N*m]                     0.167 <= 0.015  [5주차]
+  [FAIL] slow_reversal backlash_K1e6_D0p01 최대 모터 토크 차 [N*m]                     0.0334 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 4.1274 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 1.171e-04 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.4006 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 117.139 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+ slow_reversal backlash_K1e7_Dcrit
+  [PASS] slow_reversal backlash_K1e7_Dcrit 최대 각도 차 [rad]                        9.898e-05 <= 0.001  [5주차]
+  [PASS] slow_reversal backlash_K1e7_Dcrit 최대 샘플 iq 차 [A]                       0.008749 <= 0.01  [5주차]
+  [PASS] slow_reversal backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m]                     0.01312 <= 0.015  [5주차]
+  [PASS] slow_reversal backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m]                     0.002625 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 0.9764 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 1.757e-06 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 0.4081 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 29.466 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+ slow_reversal backlash_K1e7_D0p01
+  [FAIL] slow_reversal backlash_K1e7_D0p01 최대 각도 차 [rad]                        0.001115 <= 0.001  [5주차]
+  [FAIL] slow_reversal backlash_K1e7_D0p01 최대 샘플 iq 차 [A]                       0.1333 <= 0.01  [5주차]
+  [FAIL] slow_reversal backlash_K1e7_D0p01 최대 관절 토크 차 [N*m]                     0.1999 <= 0.015  [5주차]
+  [FAIL] slow_reversal backlash_K1e7_D0p01 최대 모터 토크 차 [N*m]                     0.03998 <= 0.003  [5주차]
+  (참고) 유격 안 시간 MATLAB 4.1745 / 민혁 0.9918 s | 한계 초과(침투) 최대 MATLAB 3.781e-05 / 민혁 1.458e-04 rad | 모터/N-부하 속도 차 최대 MATLAB 2.5191 / 민혁 0.4085 rad/s, 전달 토크 피크 MATLAB 378.090 / 민혁 1.989 N*m (접촉 모델 의존, 판정 아님)
+  (참고) slow_reversal: MATLAB backlash(K1e6,Dcrit) vs near_zero_gap 최대 각도 차 4.084e-04 rad, 최대 iq 차 1.303e-02 A | 민혁 4.091e-04 rad, 1.027e-02 A
+  (참고) slow_reversal: 접촉 설정 6개 사이 최대 각도 차 2.1886e-03 rad (관측값, 합격 조건 아님)
+
+[d] MATLAB 자체 간격 수렴 (reversal_steps / backlash / K1e6 / Dcrit, 최대 스텝 5 us vs 2.5 us)
+  [PASS] MATLAB 5 us vs 2.5 us 최대 각도 차 [rad]                                    1.185e-07 <= 0.001  [신규] (값은 민혁 README §9 의 MuJoCo dt 수렴 기준을 재사용)
+  [PASS] MATLAB 5 us vs 2.5 us 각도 차 RMS [rad]                                   1.918e-08 <= 0.0002  [신규]
+  [PASS] MATLAB 5 us vs 2.5 us 최대 부하 속도 차 [rad/s]                               0.0002612 <= 0.05  [신규]
+  [PASS] MATLAB 5 us vs 2.5 us 최대 iq 차 [A]                                      0.0001609 <= 0.02  [신규]
+  [PASS] MATLAB 5 us vs 2.5 us 부하 전달 토크 차 RMS [N*m]                             0.003098 <= 0.1  [신규]
+
+[요약]
+  검사 109개 중 56개 통과, 53개 실패
+   절 [a]: 13개 중 13개 통과
+   절 [b]: 13개 중 13개 통과
+   절 [c]: 78개 중 25개 통과
+   절 [d]: 5개 중 5개 통과
+  실패: [c] baseline_step backlash_K1e5_Dcrit 최대 샘플 iq 차 [A] = 0.01635 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m] = 0.02453 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m] = 0.004906 (기준 0.003, 5주차)
+  실패: [c] baseline_step backlash_K1e5_D0p01 최대 샘플 iq 차 [A] = 0.1066 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e5_D0p01 최대 관절 토크 차 [N*m] = 0.1599 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e5_D0p01 최대 모터 토크 차 [N*m] = 0.03199 (기준 0.003, 5주차)
+  실패: [c] baseline_step backlash_K1e5_D0p01 2% 정착시간 차 [s] = 0.014 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e6_Dcrit 최대 샘플 iq 차 [A] = 0.02244 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m] = 0.03366 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m] = 0.006732 (기준 0.003, 5주차)
+  실패: [c] baseline_step backlash_K1e6_D0p01 최대 각도 차 [rad] = 0.001263 (기준 0.001, 5주차)
+  실패: [c] baseline_step backlash_K1e6_D0p01 최대 샘플 iq 차 [A] = 0.1055 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e6_D0p01 최대 관절 토크 차 [N*m] = 0.1583 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e6_D0p01 최대 모터 토크 차 [N*m] = 0.03166 (기준 0.003, 5주차)
+  실패: [c] baseline_step backlash_K1e6_D0p01 2% 정착시간 차 [s] = 0.035 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e7_Dcrit 최대 샘플 iq 차 [A] = 0.03128 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m] = 0.04692 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m] = 0.009384 (기준 0.003, 5주차)
+  실패: [c] baseline_step backlash_K1e7_D0p01 최대 샘플 iq 차 [A] = 0.13 (기준 0.01, 5주차)
+  실패: [c] baseline_step backlash_K1e7_D0p01 최대 관절 토크 차 [N*m] = 0.195 (기준 0.015, 5주차)
+  실패: [c] baseline_step backlash_K1e7_D0p01 최대 모터 토크 차 [N*m] = 0.03901 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_Dcrit 최대 샘플 iq 차 [A] = 0.01394 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_Dcrit 최대 관절 토크 차 [N*m] = 0.02092 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_Dcrit 최대 모터 토크 차 [N*m] = 0.004183 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_D0p01 최대 각도 차 [rad] = 0.001093 (기준 0.001, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_D0p01 최대 샘플 iq 차 [A] = 0.1347 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_D0p01 최대 관절 토크 차 [N*m] = 0.2021 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e5_D0p01 최대 모터 토크 차 [N*m] = 0.04042 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_Dcrit 최대 샘플 iq 차 [A] = 0.02195 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_Dcrit 최대 관절 토크 차 [N*m] = 0.03292 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_Dcrit 최대 모터 토크 차 [N*m] = 0.006584 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_D0p01 최대 각도 차 [rad] = 0.001483 (기준 0.001, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_D0p01 최대 샘플 iq 차 [A] = 0.1331 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_D0p01 최대 관절 토크 차 [N*m] = 0.1997 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e6_D0p01 최대 모터 토크 차 [N*m] = 0.03994 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_Dcrit 최대 샘플 iq 차 [A] = 0.02787 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_Dcrit 최대 관절 토크 차 [N*m] = 0.04181 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_Dcrit 최대 모터 토크 차 [N*m] = 0.008362 (기준 0.003, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_D0p01 최대 각도 차 [rad] = 0.001249 (기준 0.001, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_D0p01 최대 샘플 iq 차 [A] = 0.1369 (기준 0.01, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_D0p01 최대 관절 토크 차 [N*m] = 0.2054 (기준 0.015, 5주차)
+  실패: [c] reversal_steps backlash_K1e7_D0p01 최대 모터 토크 차 [N*m] = 0.04108 (기준 0.003, 5주차)
+  실패: [c] slow_reversal backlash_K1e5_D0p01 최대 샘플 iq 차 [A] = 0.1118 (기준 0.01, 5주차)
+  실패: [c] slow_reversal backlash_K1e5_D0p01 최대 관절 토크 차 [N*m] = 0.1676 (기준 0.015, 5주차)
+  실패: [c] slow_reversal backlash_K1e5_D0p01 최대 모터 토크 차 [N*m] = 0.03353 (기준 0.003, 5주차)
+  실패: [c] slow_reversal backlash_K1e6_D0p01 최대 각도 차 [rad] = 0.001638 (기준 0.001, 5주차)
+  실패: [c] slow_reversal backlash_K1e6_D0p01 최대 샘플 iq 차 [A] = 0.1113 (기준 0.01, 5주차)
+  실패: [c] slow_reversal backlash_K1e6_D0p01 최대 관절 토크 차 [N*m] = 0.167 (기준 0.015, 5주차)
+  실패: [c] slow_reversal backlash_K1e6_D0p01 최대 모터 토크 차 [N*m] = 0.0334 (기준 0.003, 5주차)
+  실패: [c] slow_reversal backlash_K1e7_D0p01 최대 각도 차 [rad] = 0.001115 (기준 0.001, 5주차)
+  실패: [c] slow_reversal backlash_K1e7_D0p01 최대 샘플 iq 차 [A] = 0.1333 (기준 0.01, 5주차)
+  실패: [c] slow_reversal backlash_K1e7_D0p01 최대 관절 토크 차 [N*m] = 0.1999 (기준 0.015, 5주차)
+  실패: [c] slow_reversal backlash_K1e7_D0p01 최대 모터 토크 차 [N*m] = 0.03998 (기준 0.003, 5주차)
+  하지 않은 것: 민혁 단독 gap_probe 의 MATLAB 대응(제어기 분리 +-0.02 N*m 입력 시험), MuJoCo 내부 검사(운동방정식 잔차 1e-8, solver tolerance), 25/12.5/6.25 us 수렴(MATLAB 은 가변 스텝).
+  PASS 는 위 기준(출처 표시) 안에 들어왔다는 뜻이며 실제 하드웨어와 일치한다는 뜻이 아니다. [신규] 기준은 사용자 승인(2026-10-11)을 받았다.

@@ -1,0 +1,23 @@
+function p = w5s3_params()
+%W5S3_PARAMS 3단계(기어비 + 회전자 관성) MuJoCo vs MATLAB 합의 조건 (이민혁 README_stage3_1/3_2, 2026-10-04)
+%   2단계(w5s2_params) 조건에 이상 기어비 N=5 추가(3-1), 이어서 모터축 회전자 관성 Jm=1e-4 추가(3-2).
+%   모든 값은 가정값이며 이 파일에서만 읽는다.
+p = w5s2_params();
+p.gear.N  = 5;                          % 기어비 N = 모터 속도 / 관절 속도 (효율 100%, 마찰·백래시·탄성 없음)
+p.gear.Jm = 1e-4;                       % [kg*m^2] 모터축 회전자 관성 (3-2에서만 사용)
+p.gear.Jred = p.gear.N^2 * p.gear.Jm;   % 0.0025 관절 환산 관성. 방식 A(관절 환산)만 사용, 방식 B와 중복 금지
+p.s3.stages = struct( ...
+    'id',   {'3-1', '3-2'}, ...
+    'name', {'w5_stage3_1_joint', 'w5_stage3_2_joint'}, ...
+    'dir',  {'stage3_1', 'stage3_2'}, ...
+    'Jred', {0, p.gear.Jred});
+p.s3.cases = struct( ...
+    'name',   {'baseline_24V', 'large_24V', 'large_2V'}, ...
+    'target', {0.3, 2, 2}, ...
+    'V',      {24, 24, 2});
+p.s3.maxsteps = p.s2.maxsteps;
+p.s3.tags     = p.s2.tags;
+% 기어 단독 검사: 정지 상태 모터 토크 0.02 N*m -> 관절 입력 토크 0.1 N*m
+p.s3.chk_Tm = 0.02;
+p.s3.chk_Tj = p.gear.N * p.s3.chk_Tm;
+end

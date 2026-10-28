@@ -1,0 +1,25 @@
+# 비밀값: RCV 토큰이 들어 있다. 절대 커밋하지 않는다
+.mcp.json
+
+# 임시, 로컬 파일
+~$*
+*.tmp
+.venv/
+__pycache__/
+*.asv
+slprj/
+*.autosave
+
+# 큰 결과 데이터(재생성 가능하거나 민혁 자료): 코드와 보고서만 둔다
+*.csv
+*.zip
+week5/matlab_results/
+week6/matlab_results/
+week6/이민혁/
+week5/이민혁/
+week5/RAM_upload_*/
+week6/RCV_attach/
+
+# 문서 원본(바이너리, 필요하면 따로 보관)
+*.pptx
+*.xlsx

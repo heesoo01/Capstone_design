@@ -1,0 +1,29 @@
+MATLAB 26.1.0.3251617 (R2026a) Update 2 | Simulink 가변 스텝 solver=ode23t RelTol=1e-6 AbsTol=1e-9 | MaxStep=[2.5e-05 1.25e-05 6.25e-06]
+위치 루프 0.001 s, 전류 루프 0.0001 s, 로그 간격 위치 0.001 s / 전기 0.0001 s, 로컬 솔버 사용 안 함
+
+구현 가정 (MuJoCo 코드와 대조 필요):
+- 위치 루프(1 ms): tau* = Kp(qref-q) - Kd*qdot (샘플 시점 측정), iq* = clip(tau*/Kt, +-2 A), id* = 0, 다음 위치 샘플까지 유지
+- 전류 루프(100 us): 샘플 시점의 id, iq, 모터 속도 사용. 병렬형 PI v = Kpi*e + I + ff, ff_d = -we*L*iq, ff_q = we*(L*id+psi), we = pp*wm
+- 전압 제한: |v| > Vdc/sqrt(3) 이면 방향 유지, 크기를 한계로 축소 (s = min(1, Vmax/|v|))
+- 안티윈드업(역계산): I[k+1] = I[k] + Ts*(Ki*e + Kaw*(v_sat - v_cmd)), v_cmd는 ff 포함, 현재 I로 전압을 계산한 뒤 적분 상태 갱신, Ts=100 us 전방 오일러
+- 계산한 v_sat는 다음 100 us 동안 유지. 위치·전류 루프 시각이 겹치면 위치 루프가 먼저 갱신된 iq*를 전류 루프가 사용
+- PMSM dq 방정식은 연속시간으로 적분, tau_m = 1.5*pp*psi*iq 를 관절에 연속 인가
+
+2-1 MaxStep 2.5e-05: iq(10ms)=1.264241 max|iq-exact|=3.817e-07
+2-1 MaxStep 1.25e-05: iq(10ms)=1.264241 max|iq-exact|=9.512e-08
+2-1 MaxStep 6.25e-06: iq(10ms)=1.264241 max|iq-exact|=2.357e-08
+2-2_24V MaxStep 2.5e-05: tau*(0.2)=1.200000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=0.299904 vmax=0.852610 ts=0.920 rmse=0.093919 포화 없음
+2-2_24V MaxStep 1.25e-05: tau*(0.2)=1.200000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=0.299904 vmax=0.852610 ts=0.920 rmse=0.093919 포화 없음
+2-2_24V MaxStep 6.25e-06: tau*(0.2)=1.200000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=0.299904 vmax=0.852610 ts=0.920 rmse=0.093919 포화 없음
+2-2_24V convergence MaxStep 1.25e-05 vs 2.5e-05: max|dq|=4.361e-07 max|diq|=2.369e-06
+2-2_24V convergence MaxStep 6.25e-06 vs 2.5e-05: max|dq|=6.119e-07 max|diq|=3.645e-06
+2-3_24V MaxStep 2.5e-05: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=1.997697 vmax=3.582390 ts=1.193 rmse=0.909489 포화 없음
+2-3_24V MaxStep 1.25e-05: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=1.997697 vmax=3.582390 ts=1.193 rmse=0.909488 포화 없음
+2-3_24V MaxStep 6.25e-06: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=2.0002 q_end=1.997697 vmax=3.582390 ts=1.193 rmse=0.909488 포화 없음
+2-3_24V convergence MaxStep 1.25e-05 vs 2.5e-05: max|dq|=3.083e-07 max|diq|=1.683e-06
+2-3_24V convergence MaxStep 6.25e-06 vs 2.5e-05: max|dq|=4.489e-07 max|diq|=2.669e-06
+2-3_2V MaxStep 2.5e-05: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=1.9997 q_end=1.996686 vmax=2.888093 ts=1.271 rmse=0.949104 포화 구간 0.2000 ~ 0.8069 s (26.6% 시간)
+2-3_2V MaxStep 1.25e-05: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=1.9997 q_end=1.996686 vmax=2.888098 ts=1.271 rmse=0.949104 포화 구간 0.2000 ~ 0.8069 s (26.6% 시간)
+2-3_2V MaxStep 6.25e-06: tau*(0.2)=8.000000 iq_ref(0.2)=2.0000 iqmax=1.9997 q_end=1.996686 vmax=2.888100 ts=1.271 rmse=0.949104 포화 구간 0.2000 ~ 0.8069 s (26.6% 시간)
+2-3_2V convergence MaxStep 1.25e-05 vs 2.5e-05: max|dq|=2.248e-06 max|diq|=1.218e-05
+2-3_2V convergence MaxStep 6.25e-06 vs 2.5e-05: max|dq|=2.925e-06 max|diq|=1.825e-05

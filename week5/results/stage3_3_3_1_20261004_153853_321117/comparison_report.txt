@@ -1,0 +1,50 @@
+3-3 / 3-1: CSV numerical comparison
+No resampling/time shift. Physical/solver verification is separate.
+
+baseline_24V: PASS
+  max_angle_difference_rad: 1.7463265882533552e-06
+  time_at_max_angle_difference_s: 0.33
+  between_environment_position_rmse_rad: 5.584697933304837e-07
+  max_speed_difference_rad_s: 5.530812089186987e-05
+  max_iq_difference_A: 5.394677159109573e-05
+  max_id_difference_A: 1.5552341607131698e-06
+  max_joint_input_torque_difference_Nm: 8.092015739125102e-05
+  max_motor_torque_difference_Nm: 1.6184031477239902e-05
+  max_motor_speed_difference_rad_s: 0.0002767879956407371
+  max_voltage_vector_difference_V: 9.166653388995645e-05
+  voltage_flag_mismatch_count: 0
+  voltage_saturated_duration_difference_s: 0.0
+  settling_status: both_settled
+  settling_difference_s: 0.0
+large_24V: PASS
+  max_angle_difference_rad: 5.387730473760399e-06
+  time_at_max_angle_difference_s: 0.7190000000000001
+  between_environment_position_rmse_rad: 2.634836818477867e-06
+  max_speed_difference_rad_s: 0.00015740469783659394
+  max_iq_difference_A: 7.194368031293585e-05
+  max_id_difference_A: 1.109273813606435e-05
+  max_joint_input_torque_difference_Nm: 0.00010791552046995889
+  max_motor_torque_difference_Nm: 2.158310409394737e-05
+  max_motor_speed_difference_rad_s: 0.000787082786386506
+  max_voltage_vector_difference_V: 0.00032697535962965886
+  voltage_flag_mismatch_count: 0
+  voltage_saturated_duration_difference_s: 0.0
+  settling_status: both_settled
+  settling_difference_s: 0.0
+large_2V: PASS
+  max_angle_difference_rad: 7.234778490974869e-06
+  time_at_max_angle_difference_s: 0.28
+  between_environment_position_rmse_rad: 6.3481459632900065e-06
+  max_speed_difference_rad_s: 0.00015156038437158514
+  max_iq_difference_A: 0.00030720177318621644
+  max_id_difference_A: 1.809889896393045e-05
+  max_joint_input_torque_difference_Nm: 0.0004608026597794357
+  max_motor_torque_difference_Nm: 9.216053195493235e-05
+  max_motor_speed_difference_rad_s: 0.0007581082898697744
+  max_voltage_vector_difference_V: 1.3148158375060506e-05
+  voltage_flag_mismatch_count: 0
+  voltage_saturated_duration_difference_s: 0.0
+  settling_status: both_unsettled_NA
+  settling_difference_s: None
+
+Overall numerical CSV: PASS

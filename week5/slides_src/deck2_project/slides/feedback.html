@@ -1,0 +1,8 @@
+<section id="feedback" data-transition="fade" style="background:#F4F6F9;color:#17202C;font-family:'Noto Sans KR','Malgun Gothic',Arial,sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:28px;font-weight:700;color:#2A5DB0;letter-spacing:2px">5주차 진행 보고 · 채희수</p>
+<h2 style="font-size:58px;font-weight:700;line-height:1.15">지난 피드백에 해본 것과 결론</h2>
+<table style="font-size:26px;color:#17202C;font-family:'Noto Sans KR','Malgun Gothic',Arial,sans-serif"><tr><th style="width:24%">지난 피드백</th><th style="width:40%">해본 것</th><th style="width:36%">결론</th></tr><tr><td>MuJoCo는 어디까지 구현되어 있고, 어디를 바꿔야 하나</td><td>같은 조건으로 Simscape에 모델을 만들고, 외부 Python PMSM을 쓴 MuJoCo와 단계별로 비교</td><td>두 환경 모두 같은 액추에이터 모델을 구현할 수 있고 결과가 같았다. MuJoCo는 전기 쪽을 코드로 넣어야 한다</td></tr><tr><td>평균 모델만 써도 되는 이유를 설득</td><td>평균 인버터로 구현하고 전압 한계·포화까지 반영해서 비교</td><td>PWM과의 직접 비교는 아직 못 했다. 다음 계획</td></tr><tr><td>발표자료를 만들고 마지막에 일정 점검</td><td>이 자료와 간트차트 상세화</td><td>지연 1건 (8쪽)</td></tr></table>
+<p style="font-size:28px;line-height:1.4;color:#586374">비교 조건(모두 가정값): 1자유도, 링크 1 kg, 위치 PD Kp 4 / Kd 1 (1 ms), PMSM R 0.5 Ω · L 5 mH · Kt 0.3 N·m/A, 전류 PI 1.5 / 150 (100 µs), 전원 24 V · 2 V, 목표 0.3 · 2 rad</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#586374">5주차 진행 보고 · 1 / 9</p>
+<aside>지난 미팅의 세 가지 피드백에 이번 주 무엇을 해서 어떤 결론이 났는지 한 장으로 정리했습니다. MuJoCo에는 PMSM과 인버터 기본 기능이 없어서 민혁이 외부 Python으로 넣었고, 저는 같은 조건으로 Simscape에서 만들어 비교했습니다. 평균 모델이 충분한지는 아직 PWM과 직접 비교하지 못했습니다.</aside>
+</section>
