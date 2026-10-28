@@ -50,16 +50,18 @@
 CLAUDE.md, STATUS.md        지침과 현재 상태
 docs/                       decisions.md, references.md, simulator-survey.md(초안), 이 문서, SETUP_LINUX.md, claude_memory_backup/
 feedback/                   교수님 피드백 원문
-week5/                      1~3단계: config/, models/(w5_mujoco_vs_matlab_1dof, w5_stage2_pmsm_joint, w5_stage3_2_joint 등), scripts/, results/, 이민혁/, 강동하/
-week6/                      4단계: config/w6s41~44_params.m, scripts/w6s4X_{build,run}.m + w6s4X_compare.py, scripts/cosim/(연동 시험), models/, results/, RCV 초안, 발표 대본
+week5/                      config/(파라미터 4개), models/w5_stage3_2_joint.slx(4단계 기준 모델), results/, 이민혁/, 강동하/
+week6/                      4단계: config/w6s41~44_params.m, scripts/w6s4X_{build,run}.m + w6s4X_compare.py, scripts/cosim/(Python만 남김), models/(4단계 모델 12개), results/, RCV 초안, 발표 대본
 ```
-모델 이름: 1단계 `w5_mujoco_vs_matlab_1dof`, 2단계 `w5_stage2_pmsm_joint`, 3단계 `w5_stage3_2_joint`(**기준 모델**), 4단계 `w6_stage4_{1_joint,2_joint,3_pwm,3_avg,4_joint}`, 연동 `w6_cosim_mujoco`. 결과 CSV(약 1.4 GB)와 민혁 CSV는 git에 넣지 않았다.
+모델 이름: 1단계 `w5_mujoco_vs_matlab_1dof`, 2단계 `w5_stage2_pmsm_joint`, 3단계 `w5_stage3_2_joint`(**기준 모델**), 4단계 `w6_stage4_{1_joint,2_joint,3_pwm,3_avg,4_joint}`, 연동 `w6_cosim_mujoco`. 결과 CSV와 민혁 CSV는 git에 넣지 않았다.
+
+**2026-10-29 정리**: 작업 폴더에는 6주차 4단계 모델과 그 의존 파일(week5/config, w5_stage3_2_joint.slx)만 남겼다. 1~3단계 모델, week5/scripts, 연동(w6c_*.m, MuJoCoJointSys.m, w6_cosim_mujoco.slx), present 복사본은 작업 폴더에서만 지웠고 커밋 73aac1f에서 복구할 수 있다(`git checkout 73aac1f -- <경로>`). 결과 CSV(week5 약 110 MB, week6 약 613 MB)는 git에 없어서 `D:\Capstone_design_backup\week{5,6}_matlab_results_20261029.zip`에 보관했다.
 
 ## 7. 새 모델링에서 재사용할 것
 - **기준 구조**: 위치 PD(1 ms) → 전류 PI(100 µs, 전향 보상) → 전압 벡터 제한(Vdc/√3, 안티윈드업) → PMSM dq → 기어(N=5) → 관절. 파라미터는 `week5/config/w5s3_params.m`(R 0.5 Ω, L 5 mH, ψ 0.05 Wb, 극쌍 4, Kt 0.3, 링크 1 kg 0.4×0.05×0.05 m, 감쇠 0.1, 회전자 관성 환산 0.0025)에 모았다. 모두 가정값이다.
 - **방법론**: 비교 전에 상대 CSV에 내 지표 계산을 적용해 summary.json이 재현되는지 먼저 확인, 출처별 판정 기준, 민감도는 값 목록으로, 시간 간격을 줄여 수렴 확인.
 - **4단계 블록**: PWM 인버터, 열 노드(R(T), 1 ms 갱신, 식은 민혁 `thermal_step`과 같음), Simscape 마찰 회로(속도원+마찰 블록+토크센서), 두 관절 직렬 백래시.
-- **연동**: `week6/scripts/cosim/`(MuJoCoJointSys.m, mj_cosim.py, w6c_*.m). 빌드→실행→비교 순서.
+- **연동**: 정리 후 `week6/scripts/cosim/`에는 mj_cosim.py, w6c_compare.py만 있다. MATLAB 쪽(MuJoCoJointSys.m, w6c_build/run.m)은 커밋 73aac1f에서 복구.
 - 던지기 쪽: 1자유도 팔 + 스크립트 릴리스가 5주차 방향. 1자유도는 팔이 도는 평면 안의 거리만 맞출 수 있고 옆 방향 목표는 최소 2자유도가 필요하다(투사체 역학으로 따진 것, 시뮬레이션 확인은 아님).
 
 ## 8. 열린 결정과 다음 단계
