@@ -17,6 +17,12 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-23 [Code] GitHub 팀 계정·진행 보드 만듦
+- 한 일: GitHub Organization `RAMS-Capstone`을 만들고(희수 소유, 무료), 그 안에 Projects 보드 "PMSM 액추에이터 → Kinova Gen3 던지기"(https://github.com/orgs/RAMS-Capstone/projects/1, 비공개)를 만들었다.
+- 카드 12개: 민혁 저장소(`chatelard25/SME_Capstone`, aadfae2) 문서 기준. Done 6(단계1, 단계3-1·3-2·3-3·3-3a·3-4), In Progress 1(단계2 동하), Todo 5(관절2 꽂기, 관절4→1, 단계4 던지기, 희수 PC 실행 확인, 희수 담당 정하기). 모두 Draft 카드이고 담당은 제목에 이름으로만 적었다.
+- 못 한 것: 팀원 초대(GitHub ID 필요), 보드(칸반) 보기 추가, 민혁 저장소와 보드 연결(민혁 저장소를 팀 계정에 넣는 건 민혁이 결정).
+- `heesoo01/Capstone_design` 저장소는 아직 희수 개인 계정에 있다.
+
 ### 2026-11-23 [Code] 이 폴더를 희수 GitHub 저장소에 올림
 - 한 일: 현재 폴더 상태를 커밋(7b67912)하고 `https://github.com/heesoo01/Capstone_design` (Public, main)에 push했다.
 - `.gitignore` 수정: archive로 옮긴 민혁 자료(`week*/이민혁/`), `RAM_upload_*`, `RCV_attach`, `matlab_results`가 다시 걸러지게 했고, `*.mp4`(중간발표 영상 53 MB)를 제외했다. `.mcp.json`과 `SME_Capstone/`은 원래대로 제외된다.
