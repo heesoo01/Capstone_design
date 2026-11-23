@@ -16,6 +16,12 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-23 [Code] MATLAB R2026b 설치 확인
+- 희수가 R2026b를 설치했다. 확인 결과: `C:\Program Files\MATLAB\R2026b`(10.1 GB), 버전 26.2.0.3433840 (R2026b) Update 1, 툴박스 7개(MATLAB, Simulink, Simscape, Multibody, Electrical, Driveline, Robotics System Toolbox).
+- `Gen3_throw_baseline.slx`(R2026b 저장)를 R2026b에서 열고 `robotToTest`(바디 8개)를 읽는 데 성공했다. R2026a에서는 같은 파일이 "최신 버전으로 생성됨" 오류로 안 열렸다.
+- PATH의 `matlab`은 아직 R2026a를 가리킨다. 설치 임시 폴더 `D:\_temp_matlab_R2026b_Windows`(0.6 GB)가 남아 있다.
+- 아직 안 한 것: 단계 1·2·3 스크립트 실행.
+
 ### 2026-11-23 [Code] 옛 사본 SME_Capstone/ 삭제(휴지통)
 - 사용자 요청으로 git 연결 없는 옛 사본 `SME_Capstone/`을 휴지통에 보냈다. 이제 팀 저장소는 `SME_Capstone_git/`(git clone)만 쓴다.
 - 지우기 전 비교: 텍스트 14개는 줄바꿈(CRLF)만 달랐고, PNG 11개는 바이트가 달랐지만 git 이력에 없는 재인코딩본이었다(stage2_tests.png를 눈으로 비교해 같은 그림 확인). 옛 사본에만 있는 파일은 없었다.
