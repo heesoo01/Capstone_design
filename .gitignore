@@ -23,3 +23,16 @@ week6/RCV_attach/
 # 문서 원본(바이너리, 필요하면 따로 보관)
 *.pptx
 *.xlsx
+
+# 팀 저장소 사본(GitHub chatelard25/SME_Capstone에서 관리)
+SME_Capstone/
+SME_Capstone_git/
+
+# 큰 영상 파일 (GitHub 50MB 경고)
+*.mp4
+
+# archive로 옮긴 뒤에도 같은 규칙 적용 (민혁 자료·큰 결과)
+archive_2026-11_이전주제/week*/이민혁/
+archive_2026-11_이전주제/week*/matlab_results/
+archive_2026-11_이전주제/week5/RAM_upload_*/
+archive_2026-11_이전주제/week6/RCV_attach/
