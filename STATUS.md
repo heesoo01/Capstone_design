@@ -17,6 +17,12 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-23 [Code] 이 폴더를 희수 GitHub 저장소에 올림
+- 한 일: 현재 폴더 상태를 커밋(7b67912)하고 `https://github.com/heesoo01/Capstone_design` (Public, main)에 push했다.
+- `.gitignore` 수정: archive로 옮긴 민혁 자료(`week*/이민혁/`), `RAM_upload_*`, `RCV_attach`, `matlab_results`가 다시 걸러지게 했고, `*.mp4`(중간발표 영상 53 MB)를 제외했다. `.mcp.json`과 `SME_Capstone/`은 원래대로 제외된다.
+- 확인: 올린 파일과 과거 커밋 이력에서 토큰을 검사했고 발견되지 않았다. 공개 저장소에는 `feedback/` 교수님 피드백 원문이 포함된다.
+- 다음 할 일: 팀원(민혁, 동하) Collaborator 초대. 팀 공식 저장소(`chatelard25/SME_Capstone`)와 역할을 어떻게 나눌지 팀과 정하기.
+
 ### 2026-11-23 [채팅] 주제 변경에 맞춰 폴더·지침 재구성
 - 한 일:
   - 민혁 GitHub 저장소(aadfae2)를 `SME_Capstone/`으로 복사했다 (.git은 원격 도구로 쓸 수 없어 제외).
