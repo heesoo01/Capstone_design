@@ -17,6 +17,12 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-23 [Code] 민혁 저장소 팀 계정 이전 확인, 보드 연결, clone
+- 민혁이 저장소를 `RAMS-Capstone/SME_Capstone`으로 옮긴 것을 확인했다(HEAD aadfae2 그대로). 희수가 민혁 역할을 Owner로 바꿨다.
+- 저장소 Projects 탭에서 진행 보드(projects/1)를 연결했다. 보드 설명·README의 저장소 주소를 새 주소로 고쳤다.
+- `SME_Capstone_git/`에 git clone 받음(원격 RAMS-Capstone/SME_Capstone). 옛 사본 `SME_Capstone/`은 그대로 두었다.
+- 다음 할 일: 동하 초대 및 저장소 Write 권한, 옛 사본 정리 여부 결정, Draft 카드를 Issue로 바꿀지 결정.
+
 ### 2026-11-23 [Code] GitHub 팀 계정·진행 보드 만듦
 - 한 일: GitHub Organization `RAMS-Capstone`을 만들고(희수 소유, 무료), 그 안에 Projects 보드 "PMSM 액추에이터 → Kinova Gen3 던지기"(https://github.com/orgs/RAMS-Capstone/projects/1, 비공개)를 만들었다.
 - 카드 12개: 민혁 저장소(`chatelard25/SME_Capstone`, aadfae2) 문서 기준. Done 6(단계1, 단계3-1·3-2·3-3·3-3a·3-4), In Progress 1(단계2 동하), Todo 5(관절2 꽂기, 관절4→1, 단계4 던지기, 희수 PC 실행 확인, 희수 담당 정하기). 모두 Draft 카드이고 담당은 제목에 이름으로만 적었다.

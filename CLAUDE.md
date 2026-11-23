@@ -10,7 +10,9 @@ PMSM 모터·인버터(전압/전류 한계)·하모닉 감속기(탄성)·회�
 
 - 과목: 스마트 모빌리티 공학 종합 설계. 과목 담당은 심인욱 교수님(사용자 프로필 기준)이다. `feedback/` 원문의 피드백 주신 분은 유지원 교수님이다. **두 분의 관계(담당/지도)는 확인되지 않았으니 문서에 쓸 때 사용자에게 묻는다.**
 - 팀: 이민혁(로봇·CTC·통합, GitHub 저장소 관리), 강동하(모터·액추에이터 단계 2), 채희수(사용자). **희수의 현재 담당은 아직 정하지 않았다 → 사용자에게 확인.**
-- 팀 원본 저장소: GitHub `chatelard25/SME_Capstone` (main). 이 폴더의 `SME_Capstone/`은 **커밋 aadfae2(2026-11-21) 시점의 사본**이고 git 연결이 없다(채팅 쪽 도구가 .git을 쓸 수 없었음). 최신본이 필요하면 Claude Code에서 `git clone https://github.com/chatelard25/SME_Capstone.git SME_Capstone_git`로 받은 뒤 사용자와 상의해 교체한다.
+- 팀 원본 저장소: GitHub `RAMS-Capstone/SME_Capstone` (main). 2026-11-23 민혁이 `chatelard25/SME_Capstone`에서 팀 계정(Organization) `RAMS-Capstone`으로 옮겼다(예전 주소는 자동 연결). 희수·민혁은 팀 계정 Owner다.
+- 진행 보드: https://github.com/orgs/RAMS-Capstone/projects/1 (비공개, 위 저장소와 연결됨). 진행 상황은 민혁 저장소 기준으로 관리한다.
+- 이 폴더의 `SME_Capstone_git/`은 위 저장소의 **git clone**(원격 연결 있음, `git pull`로 최신화)이다. `SME_Capstone/`은 git 연결이 없는 aadfae2 사본이라 정리 대상이다(지우기 전에 사용자 확인).
 
 ## 2. 교수님 피드백 (현재 방향을 만든 것)
 - week11: 모터를 라이브러리 블록으로 "딸깍" 하지 말고 **직접 구현**할 것. **던지기 전에 움직이는 것부터** 확인할 것.
@@ -42,7 +44,8 @@ PMSM 모터·인버터(전압/전류 한계)·하모닉 감속기(탄성)·회�
 ## 5. 폴더 구조
 ```
 CLAUDE.md, STATUS.md      공통 지침과 진행 상황 (Code·채팅 공용)
-SME_Capstone/             팀 저장소 사본 (aadfae2). 코드·모델·결과의 원본은 GitHub 쪽이다
+SME_Capstone_git/         팀 저장소 git clone (RAMS-Capstone/SME_Capstone). 코드·모델·결과의 원본은 GitHub 쪽이다
+SME_Capstone/             git 연결 없는 옛 사본 (aadfae2). 정리 대상
 docs/
   민혁_작업_정리.md        민혁 작업을 희수가 이해할 수 있게 푼 설명
   team_notes/             동하용 안내 PDF 2개 (FOC 비교 11/18, Gen3 인터페이스 11/21)
