@@ -16,6 +16,10 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-23 [Code] MATLAB R2026b D 드라이브 재설치 확인
+- 희수가 R2026b를 C에서 지우고 `D:\MATLAB\R2026b`(10.1 GB)에 다시 깔았다. R2026b Update 1, 툴박스 7개 같음. `Gen3_throw_baseline.slx` 열기와 `robotToTest`(바디 8개) 읽기 다시 확인.
+- 남은 것: `C:\Program Files\MATLAB\R2026b`에 제거 후 남은 폴더(0.69 GB, matlab.exe 없음), 설치 임시 폴더 `D:\_temp_matlab_R2026b_Windows`(0.6 GB). PATH 순서는 R2026a → R2026b(D).
+
 ### 2026-11-23 [Code] MATLAB R2026b 설치 확인
 - 희수가 R2026b를 설치했다. 확인 결과: `C:\Program Files\MATLAB\R2026b`(10.1 GB), 버전 26.2.0.3433840 (R2026b) Update 1, 툴박스 7개(MATLAB, Simulink, Simscape, Multibody, Electrical, Driveline, Robotics System Toolbox).
 - `Gen3_throw_baseline.slx`(R2026b 저장)를 R2026b에서 열고 `robotToTest`(바디 8개)를 읽는 데 성공했다. R2026a에서는 같은 파일이 "최신 버전으로 생성됨" 오류로 안 열렸다.

@@ -59,8 +59,8 @@ archive_2026-11_이전주제/   이전 주제 자료 전부 (week5, week6, 중�
 - 모델은 가능하면 `build_*.m` 스크립트로 만든다(스크립트가 원본, `.slx`는 결과물). 민혁 규칙과 같다.
 
 ## 6. 실행 환경
-- MATLAB **R2026b Update 1** (이 PC, 2026-11-23 설치, `C:\Program Files\MATLAB\R2026b\bin\matlab.exe`) + Simulink, Simscape, Simscape Multibody, Simscape Electrical, Simscape Driveline, Robotics System Toolbox. 민혁과 같은 R2026b라 민혁 `.slx`가 열린다(`Gen3_throw_baseline.slx` 열기 확인).
-- R2026a Update 2도 아직 깔려 있고 PATH의 `matlab`은 **R2026a를 가리킨다.** 명령으로 실행할 때는 R2026b 전체 경로를 쓴다. R2026a에서는 R2026b로 저장된 `.slx`가 안 열린다(확인함).
+- MATLAB **R2026b Update 1** (이 PC, 2026-11-23 D 드라이브에 다시 설치, `D:\MATLAB\R2026b\bin\matlab.exe`) + Simulink, Simscape, Simscape Multibody, Simscape Electrical, Simscape Driveline, Robotics System Toolbox. 민혁과 같은 R2026b라 민혁 `.slx`가 열린다(`Gen3_throw_baseline.slx` 열기 확인).
+- R2026a Update 2도 아직 깔려 있고 PATH에는 R2026a가 R2026b보다 앞에 있어서 `matlab`은 **R2026a를 가리킨다.** 명령으로 실행할 때는 R2026b 전체 경로를 쓴다. R2026a에서는 R2026b로 저장된 `.slx`가 안 열린다(확인함).
 - Gen3 모델 `Gen3_throw_baseline.slx`는 팀 저장소 `models/original/`에 있다. 던지기 입력 `baseline_input_decel.mat`은 저장소에 없고 민혁 PC에만 있다. 단계 4 재실행에 필요하다. 없으면 "없어서 못 한다"고 말한다.
 - Python 검증 스크립트(`verify_stage1.py`, `verify_stage2.py`)는 numpy, matplotlib만 쓴다.
 - 채팅 쪽 Claude는 이 PC에서 MATLAB을 실행할 수 없다. MATLAB 실행은 Claude Code(`matlab -batch`)나 사용자가 한다.
