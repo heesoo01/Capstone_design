@@ -12,7 +12,7 @@ PMSM 모터·인버터(전압/전류 한계)·하모닉 감속기(탄성)·회�
 - 팀: 이민혁(로봇·CTC·통합, GitHub 저장소 관리), 강동하(모터·액추에이터 단계 2), 채희수(사용자). **희수의 현재 담당은 아직 정하지 않았다 → 사용자에게 확인.**
 - 팀 원본 저장소: GitHub `RAMS-Capstone/SME_Capstone` (main). 2026-11-23 민혁이 `chatelard25/SME_Capstone`에서 팀 계정(Organization) `RAMS-Capstone`으로 옮겼다(예전 주소는 자동 연결). 희수·민혁은 팀 계정 Owner다.
 - 진행 보드: https://github.com/orgs/RAMS-Capstone/projects/1 (비공개, 위 저장소와 연결됨). 진행 상황은 민혁 저장소 기준으로 관리한다.
-- 이 폴더의 `SME_Capstone_git/`은 위 저장소의 **git clone**(원격 연결 있음, `git pull`로 최신화)이다. `SME_Capstone/`은 git 연결이 없는 aadfae2 사본이라 정리 대상이다(지우기 전에 사용자 확인).
+- 이 폴더의 `SME_Capstone_git/`은 위 저장소의 **git clone**(원격 연결 있음, `git pull`로 최신화)이다. 옛 사본 `SME_Capstone/`(git 연결 없음)은 2026-11-23 사용자 요청으로 휴지통에 보냈다(clone과 줄바꿈·PNG 재인코딩만 달랐음).
 
 ## 2. 교수님 피드백 (현재 방향을 만든 것)
 - week11: 모터를 라이브러리 블록으로 "딸깍" 하지 말고 **직접 구현**할 것. **던지기 전에 움직이는 것부터** 확인할 것.
@@ -23,8 +23,8 @@ PMSM 모터·인버터(전압/전류 한계)·하모닉 감속기(탄성)·회�
 ## 3. 현재 기준 (팀 문서에 근거가 있는 것만)
 | 항목 | 값 | 근거 |
 |---|---|---|
-| 로봇 | Kinova Gen3 7축, CTC, 관절 2부터 통합 (2 → 4 → 1) | `SME_Capstone/README.md` |
-| 모터 | maxon EC-i 52 180 W, 24 V 권선 #574741 (p=8, Kt 0.04362 N·m/A, Rs 0.04675 Ω, L 0.0615 mH, Jm 1.7e-5 kg·m²) | `SME_Capstone/docs/03_관절2_기준사양_결정.md`, `stage1_motor/j2_params.m` |
+| 로봇 | Kinova Gen3 7축, CTC, 관절 2부터 통합 (2 → 4 → 1) | `SME_Capstone_git/README.md` |
+| 모터 | maxon EC-i 52 180 W, 24 V 권선 #574741 (p=8, Kt 0.04362 N·m/A, Rs 0.04675 Ω, L 0.0615 mH, Jm 1.7e-5 kg·m²) | `SME_Capstone_git/docs/03_관절2_기준사양_결정.md`, `stage1_motor/j2_params.m` |
 | 감속기 | Harmonic Drive CSG-17-100 (N=100, s=−1, Kg 1.4e4 N·m/rad, J_WG 0.79e-5) | 같은 문서 |
 | 전원·드라이브 | Vdc 24 V(민감도 18 V), 전압 한계 0.9·Vdc/√3 = 12.47 V, 전류 명령 제한 20.9 A(사례 A) / 10.4 A(사례 B) | 같은 문서 |
 | 전류 제어 | FOC, id=0, PI ωc=2π·1 kHz (Kp 0.386, Ki 294), 전향 디커플링, 원형 전압 제한, back-calculation anti-windup | 단계 1 |
@@ -45,7 +45,6 @@ PMSM 모터·인버터(전압/전류 한계)·하모닉 감속기(탄성)·회�
 ```
 CLAUDE.md, STATUS.md      공통 지침과 진행 상황 (Code·채팅 공용)
 SME_Capstone_git/         팀 저장소 git clone (RAMS-Capstone/SME_Capstone). 코드·모델·결과의 원본은 GitHub 쪽이다
-SME_Capstone/             git 연결 없는 옛 사본 (aadfae2). 정리 대상
 docs/
   민혁_작업_정리.md        민혁 작업을 희수가 이해할 수 있게 푼 설명
   team_notes/             동하용 안내 PDF 2개 (FOC 비교 11/18, Gen3 인터페이스 11/21)
@@ -56,7 +55,7 @@ feedback/                 교수님 피드백 원문 (9월)
 archive_2026-11_이전주제/   이전 주제 자료 전부 (week5, week6, 중간발표, 옛 CLAUDE/STATUS/문서)
 .mcp.json                 RCV 연구노트 MCP 연결 (토큰 포함, git 제외, 절대 내용 출력·커밋 금지)
 ```
-- `SME_Capstone/` 안의 파일은 팀 공용이다. **직접 고치지 않는다.** 고칠 필요가 있으면 `work/`에 복사해서 고치고 민혁과 상의한다(`.slx`는 git 병합이 안 됨).
+- `SME_Capstone_git/` 안의 파일은 팀 공용이다. main에 직접 커밋하지 않는다. 고칠 때는 branch를 만들어 Pull Request로 올리거나 `work/`에서 작업하고 민혁과 상의한다(`.slx`는 git 병합이 안 됨).
 - 모델은 가능하면 `build_*.m` 스크립트로 만든다(스크립트가 원본, `.slx`는 결과물). 민혁 규칙과 같다.
 
 ## 6. 실행 환경

@@ -13,15 +13,19 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 - 과목 담당(심인욱)과 피드백 주신 분(유지원) 표기
 - 현재 주차와 남은 발표 일정
 - `baseline_input_decel.mat`, Gen3 모델 실행 파일 공유 여부 (단계 3·4 재실행에 필요)
-- `SME_Capstone/`을 git clone으로 바꿀지 (지금은 aadfae2 사본)
 
 ## 작업 로그
+
+### 2026-11-23 [Code] 옛 사본 SME_Capstone/ 삭제(휴지통)
+- 사용자 요청으로 git 연결 없는 옛 사본 `SME_Capstone/`을 휴지통에 보냈다. 이제 팀 저장소는 `SME_Capstone_git/`(git clone)만 쓴다.
+- 지우기 전 비교: 텍스트 14개는 줄바꿈(CRLF)만 달랐고, PNG 11개는 바이트가 달랐지만 git 이력에 없는 재인코딩본이었다(stage2_tests.png를 눈으로 비교해 같은 그림 확인). 옛 사본에만 있는 파일은 없었다.
+- CLAUDE.md의 경로를 `SME_Capstone_git/`으로 고쳤다.
 
 ### 2026-11-23 [Code] 민혁 저장소 팀 계정 이전 확인, 보드 연결, clone
 - 민혁이 저장소를 `RAMS-Capstone/SME_Capstone`으로 옮긴 것을 확인했다(HEAD aadfae2 그대로). 희수가 민혁 역할을 Owner로 바꿨다.
 - 저장소 Projects 탭에서 진행 보드(projects/1)를 연결했다. 보드 설명·README의 저장소 주소를 새 주소로 고쳤다.
 - `SME_Capstone_git/`에 git clone 받음(원격 RAMS-Capstone/SME_Capstone). 옛 사본 `SME_Capstone/`은 그대로 두었다.
-- 다음 할 일: 동하 초대 및 저장소 Write 권한, 옛 사본 정리 여부 결정, Draft 카드를 Issue로 바꿀지 결정.
+- 다음 할 일: 동하 초대 및 저장소 Write 권한, Draft 카드를 Issue로 바꿀지 결정.
 
 ### 2026-11-23 [Code] GitHub 팀 계정·진행 보드 만듦
 - 한 일: GitHub Organization `RAMS-Capstone`을 만들고(희수 소유, 무료), 그 안에 Projects 보드 "PMSM 액추에이터 → Kinova Gen3 던지기"(https://github.com/orgs/RAMS-Capstone/projects/1, 비공개)를 만들었다.
