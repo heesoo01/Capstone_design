@@ -19,7 +19,7 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 ### 2026-11-24 [Code] 모델링 포함범위 문서를 팀 저장소 갈래에 올림
 - 팀 저장소 `SME_Capstone_git`에서 갈래 `heesoo/modeling-scope`를 만들고 `docs/모델링_포함범위_1124.md`를 `docs/04_관절2_모델링_포함범위.md`로 넣었다. `docs/README.md` 목록에 04를 추가했다(커밋 e1a1f3a, push 완료).
 - 팀 저장소의 `stage1_motor/results/J2_PMSM_Stage1.slx`가 11/24 10:49에 MATLAB 저장으로 바뀌어 있었다. 희수 요청으로 원본으로 되돌렸다.
-- PR은 아직 안 열었다. 앱 브라우저의 GitHub 로그인이 풀려 있어서 희수 로그인이 필요하다.
+- PR #5 열림: https://github.com/RAMS-Capstone/SME_Capstone/pull/5 (main ← heesoo/modeling-scope, 자동 병합 가능). 민혁·동하가 영향도 추정을 확인한 뒤 합칠 예정. 합치는 건 민혁이 한다.
 
 ### 2026-11-23 [Code] MATLAB R2026b D 드라이브 재설치 확인
 - 희수가 R2026b를 C에서 지우고 `D:\MATLAB\R2026b`(10.1 GB)에 다시 깔았다. R2026b Update 1, 툴박스 7개 같음. `Gen3_throw_baseline.slx` 열기와 `robotToTest`(바디 8개) 읽기 다시 확인.
