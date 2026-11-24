@@ -16,6 +16,10 @@ Claude Code와 채팅이 같이 쓰는 진행 상황 파일이다. 맨 위가 �
 
 ## 작업 로그
 
+### 2026-11-24 [Code] RCV 연구노트 기록 "스테이지1: 모터 구현"
+- 희수 승인("올려") 후 log_progress로 기록했다. 기록 id `ent_slrmecpqlhay`, 프로젝트 `prj_mso3xznduxw0`, stage implement, 날짜 2026-11-24. 본문은 희수가 준 그대로 올렸다.
+- 첫 시도는 앱 자동 권한 검사에 막혔고, 직접 승인을 받은 뒤 성공했다.
+
 ### 2026-11-24 [Code] 모델링 포함범위 문서를 팀 저장소 갈래에 올림
 - 팀 저장소 `SME_Capstone_git`에서 갈래 `heesoo/modeling-scope`를 만들고 `docs/모델링_포함범위_1124.md`를 `docs/04_관절2_모델링_포함범위.md`로 넣었다. `docs/README.md` 목록에 04를 추가했다(커밋 e1a1f3a, push 완료).
 - 팀 저장소의 `stage1_motor/results/J2_PMSM_Stage1.slx`가 11/24 10:49에 MATLAB 저장으로 바뀌어 있었다. 희수 요청으로 원본으로 되돌렸다.
